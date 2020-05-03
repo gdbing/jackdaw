@@ -21,6 +21,10 @@ struct NoteListView: View {
                         NoteListRowView(note: note)
                     }
                 }
+                .onDelete { (indexSet) in
+                    let noteToDelete = self.notes[indexSet.first!]
+                    self.managedObjectContext.delete(noteToDelete)
+                }
             }
             .navigationBarTitle(Text("Jackdaw"), displayMode: .inline)
             .navigationBarItems(trailing: NavigationLink(
