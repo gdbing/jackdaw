@@ -23,4 +23,5 @@ extension Note: Identifiable {
 
     @NSManaged public var text: String
     @NSManaged public var id: UUID
+    @NSManaged public var sortDate: Date
 }

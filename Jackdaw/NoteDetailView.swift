@@ -56,6 +56,7 @@ struct NoteTextFieldView: UIViewRepresentable {
                 let newNote = Note(context: self.parent.managedObjectContext)
                 newNote.text = ""
                 newNote.id = UUID()
+                newNote.sortDate = Date()
                 self.parent.note = newNote
             }
         }

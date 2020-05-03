@@ -10,7 +10,8 @@ import SwiftUI
 
 struct NoteListView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(entity: Note.entity(), sortDescriptors: [])
+    @FetchRequest(entity: Note.entity(),
+                  sortDescriptors: [NSSortDescriptor(keyPath: \Note.sortDate, ascending: false)])
     var notes: FetchedResults<Note>
 
     var body: some View {
