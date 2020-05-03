@@ -12,23 +12,21 @@ import UIKit
 fileprivate var savedRecently: Bool = false
 
 struct NoteDetailView: View {
-    @State var id: UUID?
-    @State var text: String
+    var note: Note?
     
     var body: some View {
-        NoteTextFieldView(id: $id, text: $text)
+        NoteTextFieldView(note: note)
             .padding()
     }
 }
 
 struct NoteTextFieldView: UIViewRepresentable {
     @Environment(\.managedObjectContext) var managedObjectContext
-    @Binding var id: UUID?
-    @Binding var text : String
-
+    var note: Note?
+    
     func makeUIView(context: UIViewRepresentableContext<NoteTextFieldView>) -> UITextView{
         let view = UITextView()
-        view.text = self.text
+        view.text = self.note?.text ?? ""
         view.textColor = .black
         view.font = .systemFont(ofSize: 16)
         view.isEditable = true
@@ -54,22 +52,27 @@ struct NoteTextFieldView: UIViewRepresentable {
         }
         
         func textViewDidBeginEditing(_ textView: UITextView) {
-            if self.parent.text == ""{
-                textView.text = ""
-                textView.textColor = .black
+            if self.parent.note == nil {
+                let newNote = Note(context: self.parent.managedObjectContext)
+                newNote.text = ""
+                newNote.id = UUID()
+                self.parent.note = newNote
             }
         }
         
         func textViewDidEndEditing(_ textView: UITextView) {
-            // TODO delete empty notes
-            
-            print("textViewDidEndEditing saved: \(String(describing: textView.text))")
-            self.parent.saveNote()
+            if textView.text == "" {
+                print("textViewDidEndEditing deleted empty note")
+                self.parent.managedObjectContext.delete(self.parent.note!)
+            } else {
+                print("textViewDidEndEditing saved: \(String(describing: textView.text))")
+                self.parent.saveNote()
+            }
         }
         
         func textViewDidChange(_ textView: UITextView) {
             // probably don't need this if we're not just passing the text on somewhere else
-            self.parent.text = textView.text
+            self.parent.note!.text = textView.text
 
             if savedRecently { return }
             
@@ -85,11 +88,6 @@ struct NoteTextFieldView: UIViewRepresentable {
     // MARK: Save
     
     func saveNote() {
-        print("saveNote()")
-        let newNote = Note(context: self.managedObjectContext)
-        newNote.text = self.text
-        self.id = self.id ?? UUID()
-        newNote.id = self.id!
         do {
             try self.managedObjectContext.save()
         } catch {
@@ -100,6 +98,6 @@ struct NoteTextFieldView: UIViewRepresentable {
 
 struct NoteDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        NoteDetailView(text:"This is a note\n\nlook at how good it is.")
+        NoteDetailView(note: nil)
     }
 }

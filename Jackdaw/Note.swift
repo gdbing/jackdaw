@@ -14,3 +14,13 @@ import CoreData
 public class Note: NSManagedObject {
     
 }
+
+extension Note: Identifiable {
+
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Note> {
+        return NSFetchRequest<Note>(entityName: "Note")
+    }
+
+    @NSManaged public var text: String
+    @NSManaged public var id: UUID
+}

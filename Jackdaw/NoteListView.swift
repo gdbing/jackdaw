@@ -17,14 +17,14 @@ struct NoteListView: View {
         NavigationView {
             List {
                 ForEach(notes) { note in
-                    NavigationLink(destination: NoteDetailView(id: note.id, text: note.text)) {
+                    NavigationLink(destination: NoteDetailView(note: note)) {
                         NoteListRowView(note: note)
                     }
                 }
             }
             .navigationBarTitle(Text("Jackdaw"), displayMode: .inline)
             .navigationBarItems(trailing: NavigationLink(
-                destination: NoteDetailView(text: ""),
+                destination: NoteDetailView(note: nil),
                 label: { Image(systemName: "square.and.pencil") }
             ).padding())
         }
@@ -35,8 +35,11 @@ struct NoteListRowView: View {
     @ObservedObject var note: Note
     
     var body: some View {
-        Text(note.text.split(separator: "\n")[0].trimmingCharacters(in: .whitespacesAndNewlines))
-            .lineLimit(1)
+        var text = ""
+        if note.text != "" {
+            text = note.text.split(separator: "\n")[0].trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        return Text(text).lineLimit(1)
     }
 }
 

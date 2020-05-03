@@ -15,8 +15,7 @@
 		BF4053B7245B880100C681DF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF4053B6245B880100C681DF /* Preview Assets.xcassets */; };
 		BF4053BA245B880100C681DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF4053B8245B880100C681DF /* LaunchScreen.storyboard */; };
 		BF4053C2245B88CD00C681DF /* NoteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4053C1245B88CD00C681DF /* NoteListView.swift */; };
-		BF4053C5245B8A3200C681DF /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4053C3245B8A3100C681DF /* Note+CoreDataClass.swift */; };
-		BF4053C6245B8A3200C681DF /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4053C4245B8A3200C681DF /* Note+CoreDataProperties.swift */; };
+		BF4053C5245B8A3200C681DF /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4053C3245B8A3100C681DF /* Note.swift */; };
 		BF4053C8245B8F5D00C681DF /* NoteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4053C7245B8F5D00C681DF /* NoteDetailView.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,8 +30,7 @@
 		BF4053B9245B880100C681DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF4053BB245B880100C681DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF4053C1245B88CD00C681DF /* NoteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListView.swift; sourceTree = "<group>"; };
-		BF4053C3245B8A3100C681DF /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
-		BF4053C4245B8A3200C681DF /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BF4053C3245B8A3100C681DF /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		BF4053C7245B8F5D00C681DF /* NoteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,8 +73,7 @@
 				BF4053B8245B880100C681DF /* LaunchScreen.storyboard */,
 				BF4053BB245B880100C681DF /* Info.plist */,
 				BF4053AE245B87FF00C681DF /* Jackdaw.xcdatamodeld */,
-				BF4053C3245B8A3100C681DF /* Note+CoreDataClass.swift */,
-				BF4053C4245B8A3200C681DF /* Note+CoreDataProperties.swift */,
+				BF4053C3245B8A3100C681DF /* Note.swift */,
 				BF4053B5245B880100C681DF /* Preview Content */,
 			);
 			path = Jackdaw;
@@ -162,11 +159,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF4053AB245B87FF00C681DF /* AppDelegate.swift in Sources */,
-				BF4053C6245B8A3200C681DF /* Note+CoreDataProperties.swift in Sources */,
 				BF4053B0245B87FF00C681DF /* Jackdaw.xcdatamodeld in Sources */,
 				BF4053C8245B8F5D00C681DF /* NoteDetailView.swift in Sources */,
 				BF4053C2245B88CD00C681DF /* NoteListView.swift in Sources */,
-				BF4053C5245B8A3200C681DF /* Note+CoreDataClass.swift in Sources */,
+				BF4053C5245B8A3200C681DF /* Note.swift in Sources */,
 				BF4053B2245B87FF00C681DF /* ContentView.swift in Sources */,
 				BF4053AD245B87FF00C681DF /* SceneDelegate.swift in Sources */,
 			);

@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftUI
+import CoreData
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -22,6 +23,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Get the managed object context from the shared persistent container.
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
+        // Delete all core data entries
+//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
+//        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+//        do {
+//            try        context.execute(deleteRequest)
+//        } catch let error as NSError {
+//            print ("error: \(error)")
+//        }
+        
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
         let contentView = ContentView().environment(\.managedObjectContext, context)
