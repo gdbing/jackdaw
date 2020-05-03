@@ -16,15 +16,16 @@ struct NoteDetailView: View {
     @State var text: String
     
     var body: some View {
-        NoteTextFieldView(text: $text)
+        NoteTextFieldView(id: $id, text: $text)
             .padding()
     }
 }
 
 struct NoteTextFieldView: UIViewRepresentable {
     @Environment(\.managedObjectContext) var managedObjectContext
+    @Binding var id: UUID?
     @Binding var text : String
-    
+
     func makeUIView(context: UIViewRepresentableContext<NoteTextFieldView>) -> UITextView{
         let view = UITextView()
         view.text = self.text
@@ -85,15 +86,15 @@ struct NoteTextFieldView: UIViewRepresentable {
     
     func saveNote() {
         print("saveNote()")
-//        let newNote = Note(context: self.managedObjectContext)
-//        newNote.id = (self.id != nil) ? self.id! : UUID()
-//        newNote.text = self.text
-                
-//        do {
-//            try self.managedObjectContext.save()
-//        } catch {
-//            print(error.localizedDescription)
-//        }
+        let newNote = Note(context: self.managedObjectContext)
+        newNote.text = self.text
+        self.id = self.id ?? UUID()
+        newNote.id = self.id!
+        do {
+            try self.managedObjectContext.save()
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }
 
