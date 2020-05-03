@@ -1,0 +1,380 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BF4053AB245B87FF00C681DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4053AA245B87FF00C681DF /* AppDelegate.swift */; };
+		BF4053AD245B87FF00C681DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4053AC245B87FF00C681DF /* SceneDelegate.swift */; };
+		BF4053B0245B87FF00C681DF /* Jackdaw.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF4053AE245B87FF00C681DF /* Jackdaw.xcdatamodeld */; };
+		BF4053B2245B87FF00C681DF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4053B1245B87FF00C681DF /* ContentView.swift */; };
+		BF4053B4245B880100C681DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF4053B3245B880100C681DF /* Assets.xcassets */; };
+		BF4053B7245B880100C681DF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF4053B6245B880100C681DF /* Preview Assets.xcassets */; };
+		BF4053BA245B880100C681DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF4053B8245B880100C681DF /* LaunchScreen.storyboard */; };
+		BF4053C2245B88CD00C681DF /* NoteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4053C1245B88CD00C681DF /* NoteListView.swift */; };
+		BF4053C5245B8A3200C681DF /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4053C3245B8A3100C681DF /* Note+CoreDataClass.swift */; };
+		BF4053C6245B8A3200C681DF /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4053C4245B8A3200C681DF /* Note+CoreDataProperties.swift */; };
+		BF4053C8245B8F5D00C681DF /* NoteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4053C7245B8F5D00C681DF /* NoteDetailView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BF4053A7245B87FF00C681DF /* Jackdaw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jackdaw.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF4053AA245B87FF00C681DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BF4053AC245B87FF00C681DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		BF4053AF245B87FF00C681DF /* Jackdaw.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Jackdaw.xcdatamodel; sourceTree = "<group>"; };
+		BF4053B1245B87FF00C681DF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BF4053B3245B880100C681DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BF4053B6245B880100C681DF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BF4053B9245B880100C681DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BF4053BB245B880100C681DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF4053C1245B88CD00C681DF /* NoteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListView.swift; sourceTree = "<group>"; };
+		BF4053C3245B8A3100C681DF /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BF4053C4245B8A3200C681DF /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BF4053C7245B8F5D00C681DF /* NoteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BF4053A4245B87FF00C681DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BF40539E245B87FF00C681DF = {
+			isa = PBXGroup;
+			children = (
+				BF4053A9245B87FF00C681DF /* Jackdaw */,
+				BF4053A8245B87FF00C681DF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BF4053A8245B87FF00C681DF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BF4053A7245B87FF00C681DF /* Jackdaw.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BF4053A9245B87FF00C681DF /* Jackdaw */ = {
+			isa = PBXGroup;
+			children = (
+				BF4053AA245B87FF00C681DF /* AppDelegate.swift */,
+				BF4053AC245B87FF00C681DF /* SceneDelegate.swift */,
+				BF4053B1245B87FF00C681DF /* ContentView.swift */,
+				BF4053C7245B8F5D00C681DF /* NoteDetailView.swift */,
+				BF4053C1245B88CD00C681DF /* NoteListView.swift */,
+				BF4053B3245B880100C681DF /* Assets.xcassets */,
+				BF4053B8245B880100C681DF /* LaunchScreen.storyboard */,
+				BF4053BB245B880100C681DF /* Info.plist */,
+				BF4053AE245B87FF00C681DF /* Jackdaw.xcdatamodeld */,
+				BF4053C3245B8A3100C681DF /* Note+CoreDataClass.swift */,
+				BF4053C4245B8A3200C681DF /* Note+CoreDataProperties.swift */,
+				BF4053B5245B880100C681DF /* Preview Content */,
+			);
+			path = Jackdaw;
+			sourceTree = "<group>";
+		};
+		BF4053B5245B880100C681DF /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				BF4053B6245B880100C681DF /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BF4053A6245B87FF00C681DF /* Jackdaw */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF4053BE245B880100C681DF /* Build configuration list for PBXNativeTarget "Jackdaw" */;
+			buildPhases = (
+				BF4053A3245B87FF00C681DF /* Sources */,
+				BF4053A4245B87FF00C681DF /* Frameworks */,
+				BF4053A5245B87FF00C681DF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Jackdaw;
+			productName = Jackdaw;
+			productReference = BF4053A7245B87FF00C681DF /* Jackdaw.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BF40539F245B87FF00C681DF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = "Corvus Corax";
+				TargetAttributes = {
+					BF4053A6245B87FF00C681DF = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+				};
+			};
+			buildConfigurationList = BF4053A2245B87FF00C681DF /* Build configuration list for PBXProject "Jackdaw" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BF40539E245B87FF00C681DF;
+			productRefGroup = BF4053A8245B87FF00C681DF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BF4053A6245B87FF00C681DF /* Jackdaw */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BF4053A5245B87FF00C681DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF4053BA245B880100C681DF /* LaunchScreen.storyboard in Resources */,
+				BF4053B7245B880100C681DF /* Preview Assets.xcassets in Resources */,
+				BF4053B4245B880100C681DF /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BF4053A3245B87FF00C681DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF4053AB245B87FF00C681DF /* AppDelegate.swift in Sources */,
+				BF4053C6245B8A3200C681DF /* Note+CoreDataProperties.swift in Sources */,
+				BF4053B0245B87FF00C681DF /* Jackdaw.xcdatamodeld in Sources */,
+				BF4053C8245B8F5D00C681DF /* NoteDetailView.swift in Sources */,
+				BF4053C2245B88CD00C681DF /* NoteListView.swift in Sources */,
+				BF4053C5245B8A3200C681DF /* Note+CoreDataClass.swift in Sources */,
+				BF4053B2245B87FF00C681DF /* ContentView.swift in Sources */,
+				BF4053AD245B87FF00C681DF /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BF4053B8245B880100C681DF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF4053B9245B880100C681DF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BF4053BC245B880100C681DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BF4053BD245B880100C681DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BF4053BF245B880100C681DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Jackdaw/Preview Content\"";
+				DEVELOPMENT_TEAM = PU92RY4WG7;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Jackdaw/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.corvus.corax.Jackdaw;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BF4053C0245B880100C681DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Jackdaw/Preview Content\"";
+				DEVELOPMENT_TEAM = PU92RY4WG7;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Jackdaw/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.corvus.corax.Jackdaw;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BF4053A2245B87FF00C681DF /* Build configuration list for PBXProject "Jackdaw" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF4053BC245B880100C681DF /* Debug */,
+				BF4053BD245B880100C681DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF4053BE245B880100C681DF /* Build configuration list for PBXNativeTarget "Jackdaw" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF4053BF245B880100C681DF /* Debug */,
+				BF4053C0245B880100C681DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BF4053AE245B87FF00C681DF /* Jackdaw.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BF4053AF245B87FF00C681DF /* Jackdaw.xcdatamodel */,
+			);
+			currentVersion = BF4053AF245B87FF00C681DF /* Jackdaw.xcdatamodel */;
+			path = Jackdaw.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = BF40539F245B87FF00C681DF /* Project object */;
+}
