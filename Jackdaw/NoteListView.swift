@@ -25,6 +25,9 @@ struct NoteListView: View {
                 .onDelete { (indexSet) in
                     let noteToDelete = self.notes[indexSet.first!]
                     self.managedObjectContext.delete(noteToDelete)
+                    
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.saveContext()
                 }
             }
             .navigationBarTitle(Text("Jackdaw"), displayMode: .inline)
