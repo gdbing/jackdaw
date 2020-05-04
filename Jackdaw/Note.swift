@@ -7,15 +7,11 @@
 //
 //
 
-import Foundation
 import CoreData
+import SwiftUI
 
 @objc(Note)
-public class Note: NSManagedObject {
-    
-}
-
-extension Note: Identifiable {
+public class Note: NSManagedObject, Identifiable {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Note> {
         return NSFetchRequest<Note>(entityName: "Note")
@@ -24,4 +20,12 @@ extension Note: Identifiable {
     @NSManaged public var text: String
     @NSManaged public var id: UUID
     @NSManaged public var sortDate: Date
+    
+    @NSManaged public var imageData: Data?
+    @NSManaged public var thumbnailData: Data?
+
+    func addImage(uiImage: UIImage) {
+        self.imageData = uiImage.pngData()
+        self.thumbnailData = uiImage.pngData()
+    }
 }

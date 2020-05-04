@@ -12,23 +12,27 @@ import UIKit
 fileprivate var savedRecently: Bool = false
 
 struct NoteDetailView: View {
-    var note: Note?
-    @State var showPhotoPicker: Bool = false
-    @State private var image: UIImage?
+    @State var note: Note?
+    @State private var showPhotoPicker: Bool = false
+    @State private var photoPickerImage: UIImage?
     
     var body: some View {
         VStack {
-            if image != nil {
-                Image(uiImage: image!)
+            if self.photoPickerImage != nil {
+                Image(uiImage: photoPickerImage!)
+                .resizable()
+                .scaledToFit()
+            } else if note?.imageData != nil {
+                Image(uiImage: UIImage(data: note!.imageData!)!)
                     .resizable()
                     .scaledToFit()
             }
-            NoteTextFieldView(note: note, image: $image)
+            NoteTextFieldView(note: $note)
                 .padding()
         }
         .sheet(isPresented: $showPhotoPicker,
                onDismiss: updateNoteWithImage) {
-            PhotoPickerView(image: self.$image)
+            PhotoPickerView(image: self.$photoPickerImage)
         }
         .navigationBarItems(trailing: Button(action: {
             self.showPhotoPicker = true
@@ -38,26 +42,23 @@ struct NoteDetailView: View {
         )
     }
     func updateNoteWithImage() {
-        // TODO
-        // check note exists, or create one.
-        // note!.image = self.image
-        // if we end up saving the image to file system
-        // and keeping a reference in coredata
-        // then do that here
+        guard let newImage = self.photoPickerImage else {
+            return
+        }
+        self.note = self.note ?? UserData().newNote()
+        self.note!.addImage(uiImage: newImage)
+        UserData().save()
     }
 }
 
 struct NoteTextFieldView: UIViewRepresentable {
     @Environment(\.managedObjectContext) var managedObjectContext
-    var note: Note?
-    @Binding var image: UIImage?
+    @Binding var note: Note?
+//    @Binding var image: UIImage?
 
     func makeUIView(context: UIViewRepresentableContext<NoteTextFieldView>) -> UITextView{
         let view = UITextView()
         let text = self.note?.text ?? ""
-        // TODO
-        // image = self.note?.image?
-        // pass back the image, if one exists...
         view.attributedText = self.attributedStringFrom(string: text)
         view.isEditable = true
         view.backgroundColor = .clear

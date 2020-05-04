@@ -75,11 +75,11 @@
 				BF4053C1245B88CD00C681DF /* NoteListView.swift */,
 				BFE8FF57245FF44B007BA3F7 /* PhotoPickerView.swift */,
 				BFE8FF59245FFFB9007BA3F7 /* UserData.swift */,
+				BF4053C3245B8A3100C681DF /* Note.swift */,
 				BF4053B3245B880100C681DF /* Assets.xcassets */,
 				BF4053B8245B880100C681DF /* LaunchScreen.storyboard */,
 				BF4053BB245B880100C681DF /* Info.plist */,
 				BF4053AE245B87FF00C681DF /* Jackdaw.xcdatamodeld */,
-				BF4053C3245B8A3100C681DF /* Note.swift */,
 				BF4053B5245B880100C681DF /* Preview Content */,
 			);
 			path = Jackdaw;
