@@ -13,23 +13,53 @@ fileprivate var savedRecently: Bool = false
 
 struct NoteDetailView: View {
     var note: Note?
+    @State var showPhotoPicker: Bool = false
+    @State private var image: UIImage?
     
     var body: some View {
-        NoteTextFieldView(note: note)
-            .padding()
+        VStack {
+            if image != nil {
+                Image(uiImage: image!)
+                    .resizable()
+                    .scaledToFit()
+            }
+            NoteTextFieldView(note: note, image: $image)
+                .padding()
+        }
+        .sheet(isPresented: $showPhotoPicker,
+               onDismiss: updateNoteWithImage) {
+            PhotoPickerView(image: self.$image)
+        }
+        .navigationBarItems(trailing: Button(action: {
+            self.showPhotoPicker = true
+        }) {
+            Image(systemName: "photo")
+            }
+        )
+    }
+    func updateNoteWithImage() {
+        // TODO
+        // check note exists, or create one.
+        // note!.image = self.image
+        // if we end up saving the image to file system
+        // and keeping a reference in coredata
+        // then do that here
     }
 }
 
 struct NoteTextFieldView: UIViewRepresentable {
     @Environment(\.managedObjectContext) var managedObjectContext
     var note: Note?
-    
+    @Binding var image: UIImage?
+
     func makeUIView(context: UIViewRepresentableContext<NoteTextFieldView>) -> UITextView{
         let view = UITextView()
         let text = self.note?.text ?? ""
+        // TODO
+        // image = self.note?.image?
+        // pass back the image, if one exists...
         view.attributedText = self.attributedStringFrom(string: text)
-//        view.textColor = .black
-//        view.font = .systemFont(ofSize: 16)
+
         view.isEditable = true
         view.backgroundColor = .clear
         view.delegate = context.coordinator
