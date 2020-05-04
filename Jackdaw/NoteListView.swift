@@ -13,6 +13,7 @@ struct NoteListView: View {
     @FetchRequest(entity: Note.entity(),
                   sortDescriptors: [NSSortDescriptor(keyPath: \Note.sortDate, ascending: false)])
     var notes: FetchedResults<Note>
+    // consider moving notes into UserData()
 
     var body: some View {
         NavigationView {
@@ -24,17 +25,17 @@ struct NoteListView: View {
                 }
                 .onDelete { (indexSet) in
                     let noteToDelete = self.notes[indexSet.first!]
-                    self.managedObjectContext.delete(noteToDelete)
-                    
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    appDelegate.saveContext()
+                    UserData().delete(note: noteToDelete)
                 }
             }
             .navigationBarTitle(Text("Jackdaw"), displayMode: .inline)
-            .navigationBarItems(trailing: NavigationLink(
+            .navigationBarItems(leading: NavigationLink(
                 destination: NoteDetailView(note: nil),
-                label: { Image(systemName: "square.and.pencil") }
-            ).padding())
+                label: { Image(systemName: "archivebox") }
+                ), trailing: NavigationLink(
+                    destination: NoteDetailView(note: nil),
+                    label: { Image(systemName: "square.and.pencil") }
+            ))
         }
     }
 }

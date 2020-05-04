@@ -59,7 +59,6 @@ struct NoteTextFieldView: UIViewRepresentable {
         // image = self.note?.image?
         // pass back the image, if one exists...
         view.attributedText = self.attributedStringFrom(string: text)
-
         view.isEditable = true
         view.backgroundColor = .clear
         view.delegate = context.coordinator
@@ -84,23 +83,17 @@ struct NoteTextFieldView: UIViewRepresentable {
         
         func textViewDidBeginEditing(_ textView: UITextView) {
             if self.parent.note == nil {
-                let newNote = Note(context: self.parent.managedObjectContext)
-                newNote.text = ""
-                newNote.id = UUID()
-                newNote.sortDate = Date()
-                self.parent.note = newNote
-                
-                parent.saveNote()
+                self.parent.note = UserData().newNote()
             }
         }
         
         func textViewDidEndEditing(_ textView: UITextView) {
             if textView.text == "" {
                 print("textViewDidEndEditing deleted empty note")
-                self.parent.managedObjectContext.delete(self.parent.note!)
+                UserData().delete(note: self.parent.note!)
             } else {
                 print("textViewDidEndEditing saved: \(String(describing: textView.text))")
-                self.parent.saveNote()
+                UserData().save()
             }
         }
         
@@ -113,24 +106,11 @@ struct NoteTextFieldView: UIViewRepresentable {
             
             savedRecently = true
             Timer.scheduledTimer(withTimeInterval: 1, repeats: false) {_ in
-                self.parent.saveNote()
+                UserData().save()
                 print("textViewDidChange saved: \(String(describing: textView.text))")
                 savedRecently = false
             }
         }
-    }
-    
-    // MARK: - Save
-    
-    func saveNote() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.saveContext()
-        
-//        do {
-//            try self.managedObjectContext.save()
-//        } catch {
-//            print(error.localizedDescription)
-//        }
     }
     
     // MARK: - Attributed String Styling
@@ -235,7 +215,7 @@ struct TextFieldPreviewView: UIViewRepresentable {
 
 struct NoteDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        TextFieldPreviewView(text: "Jackdaw")
+        TextFieldPreviewView(text: "Jackdaw\nA fine modern text editing product for boys and girls of all ages.\nDoes not contain asbestos.")
             .padding()
     }
 }
