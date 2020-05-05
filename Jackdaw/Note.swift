@@ -24,6 +24,8 @@ public class Note: NSManagedObject, Identifiable {
     @NSManaged public var imageData: Data?
     @NSManaged private var thumbnailData: Data?
     
+    lazy var headline: String = String(text.trimmingCharacters(in: .whitespaces).split(separator: "\n").first ?? "")
+    
     var image: UIImage? {
         set {
             guard let newValue = newValue else {

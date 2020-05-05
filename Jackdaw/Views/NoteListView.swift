@@ -45,8 +45,9 @@ struct NoteListRowView: View {
     
     var body: some View {
         HStack {
-//        Text(note.text.split(separator: "\n")[0].trimmingCharacters(in: .whitespacesAndNewlines)).lineLimit(1)
-            Text(note.text.prefix(50)).lineLimit(3)
+            Text(note.headline)
+                .lineLimit(2)
+                .font(Font.system(.headline).smallCaps())
             if note.thumbnail != nil {
                 Spacer()
                 Image(uiImage: note.thumbnail!)
