@@ -44,11 +44,14 @@ struct NoteListRowView: View {
     @ObservedObject var note: Note
     
     var body: some View {
-        var text = ""
-        if note.text != "" {
-            text = note.text.split(separator: "\n")[0].trimmingCharacters(in: .whitespacesAndNewlines)
+        HStack {
+//        Text(note.text.split(separator: "\n")[0].trimmingCharacters(in: .whitespacesAndNewlines)).lineLimit(1)
+            Text(note.text.prefix(50)).lineLimit(3)
+            if note.thumbnail != nil {
+                Spacer()
+                Image(uiImage: note.thumbnail!)
+            }
         }
-        return Text(text).lineLimit(1)
     }
 }
 

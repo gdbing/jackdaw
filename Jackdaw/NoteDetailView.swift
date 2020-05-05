@@ -23,7 +23,7 @@ struct NoteDetailView: View {
                 .resizable()
                 .scaledToFit()
             } else if note?.imageData != nil {
-                Image(uiImage: UIImage(data: note!.imageData!)!)
+                Image(uiImage: note!.image!)
                     .resizable()
                     .scaledToFit()
             }
@@ -46,7 +46,7 @@ struct NoteDetailView: View {
             return
         }
         self.note = self.note ?? UserData().newNote()
-        self.note!.addImage(uiImage: newImage)
+        self.note!.image = newImage
         UserData().save()
     }
 }

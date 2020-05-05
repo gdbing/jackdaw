@@ -12,20 +12,59 @@ import SwiftUI
 
 @objc(Note)
 public class Note: NSManagedObject, Identifiable {
-
+    
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Note> {
         return NSFetchRequest<Note>(entityName: "Note")
     }
-
+    
     @NSManaged public var text: String
     @NSManaged public var id: UUID
     @NSManaged public var sortDate: Date
     
     @NSManaged public var imageData: Data?
-    @NSManaged public var thumbnailData: Data?
-
-    func addImage(uiImage: UIImage) {
-        self.imageData = uiImage.pngData()
-        self.thumbnailData = uiImage.pngData()
+    @NSManaged private var thumbnailData: Data?
+    
+    var image: UIImage? {
+        set {
+            guard let newValue = newValue else {
+                self.imageData = nil
+                self.thumbnailData = nil
+                return
+            }
+            self.imageData = newValue.pngData()
+            
+            let size = newValue.size
+            let maxHeight: CGFloat = 90
+            let maxWidth: CGFloat = 90
+            let widthRatio = maxWidth / size.width
+            let heightRatio = maxHeight / size.height
+            
+            if heightRatio > 1 && widthRatio > 1 {
+                self.thumbnailData = newValue.pngData()
+                return
+            }
+            
+            var newSize: CGSize
+            if widthRatio > heightRatio {
+                newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+            } else {
+                newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
+            }
+            let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+            
+            UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+            newValue.draw(in: rect)
+            let smallImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            self.thumbnailData = smallImage!.pngData()
+        }
+        get {
+            return imageData != nil ? UIImage(data:imageData!) : nil
+        }
+    }
+    
+    var thumbnail: UIImage? {
+        get { return thumbnailData != nil ? UIImage(data:thumbnailData!) : nil }
     }
 }
