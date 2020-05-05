@@ -20,6 +20,7 @@
 		BFE8FF58245FF44B007BA3F7 /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE8FF57245FF44B007BA3F7 /* PhotoPickerView.swift */; };
 		BFE8FF5A245FFFB9007BA3F7 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE8FF59245FFFB9007BA3F7 /* UserData.swift */; };
 		BFE8FF6F2460F5AF007BA3F7 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE8FF6E2460F5AF007BA3F7 /* ImageView.swift */; };
+		BFE8FF7424622DF7007BA3F7 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE8FF7324622DF7007BA3F7 /* Typography.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		BFE8FF57245FF44B007BA3F7 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
 		BFE8FF59245FFFB9007BA3F7 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		BFE8FF6E2460F5AF007BA3F7 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		BFE8FF7324622DF7007BA3F7 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 				BF4053AC245B87FF00C681DF /* SceneDelegate.swift */,
 				BFE8FF7024620DDF007BA3F7 /* Views */,
 				BFE8FF59245FFFB9007BA3F7 /* UserData.swift */,
+				BFE8FF7324622DF7007BA3F7 /* Typography.swift */,
 				BF4053C3245B8A3100C681DF /* Note.swift */,
 				BF4053B3245B880100C681DF /* Assets.xcassets */,
 				BF4053B8245B880100C681DF /* LaunchScreen.storyboard */,
@@ -184,6 +187,7 @@
 				BF4053C5245B8A3200C681DF /* Note.swift in Sources */,
 				BF4053B2245B87FF00C681DF /* ContentView.swift in Sources */,
 				BFE8FF5A245FFFB9007BA3F7 /* UserData.swift in Sources */,
+				BFE8FF7424622DF7007BA3F7 /* Typography.swift in Sources */,
 				BF4053AD245B87FF00C681DF /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -63,7 +63,7 @@ struct NoteTextFieldView: UIViewRepresentable {
     func makeUIView(context: UIViewRepresentableContext<NoteTextFieldView>) -> UITextView{
         let view = UITextView()
         let text = self.note?.text ?? ""
-        view.attributedText = self.attributedStringFrom(string: text)
+        view.attributedText = Typography.attributedStringFrom(string: text)
         view.isEditable = true
         view.backgroundColor = .clear
         view.delegate = context.coordinator
@@ -105,7 +105,7 @@ struct NoteTextFieldView: UIViewRepresentable {
         func textViewDidChange(_ textView: UITextView) {
             // probably don't need this if we're not just passing the text on somewhere else
             self.parent.note!.text = textView.text
-            textView.attributedText = self.parent.attributedStringFrom(string: textView.text)
+            textView.attributedText = Typography.attributedStringFrom(string: textView.text)
             
             if savedRecently { return }
             
@@ -117,49 +117,6 @@ struct NoteTextFieldView: UIViewRepresentable {
             }
         }
     }
-    
-    // MARK: - Attributed String Styling
-    
-    func stringFrom(attributedString: NSAttributedString) -> String {
-        return ""
-    }
-    
-    func attributedStringFrom(string: String) -> NSAttributedString {
-        if string.count < 1 { return NSAttributedString(string: "") }
-        
-        // Body Typography
-        let bodyFont = UIFont.systemFont(ofSize: 14.0, weight: .regular)
-        let lineSpacing = NSMutableParagraphStyle()
-        lineSpacing.paragraphSpacing = 4
-        let bodyAttributes = [NSAttributedString.Key.font: bodyFont,
-                              NSAttributedString.Key.paragraphStyle: lineSpacing]
-        
-        // Title Typography
-        let systemFont = UIFont.systemFont(ofSize: 14.0, weight: .bold)
-        let smallCapsDesc = systemFont.fontDescriptor.addingAttributes([
-            UIFontDescriptor.AttributeName.featureSettings: [
-                [
-                    UIFontDescriptor.FeatureKey.featureIdentifier: kLowerCaseType,
-                    UIFontDescriptor.FeatureKey.typeIdentifier: kLowerCaseSmallCapsSelector
-                ]
-            ]
-        ])
-        let titleFont = UIFont(descriptor: smallCapsDesc, size: 16.0)
-        
-        guard let index = string.firstIndex(of: "\n") else {
-            //            return NSAttributedString(string: string, attributes: [NSAttributedString.Key.font : bodyAttributes])
-            return NSAttributedString(string: string.lowercased(with: .current),
-                                      attributes: [NSAttributedString.Key.font : titleFont])
-        }
-        
-        let title = String(string[..<index]).lowercased(with: .current)
-        let body = String(string[index...])
-        
-        let titleBody = NSMutableAttributedString(string: title + body, attributes: bodyAttributes)
-        titleBody.addAttribute(NSAttributedString.Key.font, value: titleFont, range: NSRange(location: 0, length: title.count))
-        
-        return titleBody
-    }
 }
 
 // MARK - Preview
@@ -169,7 +126,7 @@ struct TextFieldPreviewView: UIViewRepresentable {
     
     func makeUIView(context: UIViewRepresentableContext<TextFieldPreviewView>) -> UITextView {
         let view = UITextView()
-        view.attributedText = self.attributedStringFrom(string: text)
+        view.attributedText = Typography.attributedStringFrom(string: text)
         view.isEditable = true
 
         return view
@@ -178,44 +135,6 @@ struct TextFieldPreviewView: UIViewRepresentable {
     func updateUIView(_ uiView: UITextView, context: UIViewRepresentableContext<TextFieldPreviewView>) {
         
     }
-    
-    func attributedStringFrom(string: String) -> NSAttributedString {
-        if string.count < 1 { return NSAttributedString(string: "") }
-
-        // Body Typography
-        let bodyFont = UIFont.systemFont(ofSize: 14.0, weight: .regular)
-        let lineSpacing = NSMutableParagraphStyle()
-        lineSpacing.paragraphSpacing = 4
-        let bodyAttributes = [NSAttributedString.Key.font: bodyFont,
-                     NSAttributedString.Key.paragraphStyle: lineSpacing]
-
-        // Title Typography
-        let systemFont = UIFont.systemFont(ofSize: 14.0, weight: .bold)
-        let smallCapsDesc = systemFont.fontDescriptor.addingAttributes([
-            UIFontDescriptor.AttributeName.featureSettings: [
-                [
-                    UIFontDescriptor.FeatureKey.featureIdentifier: kLowerCaseType,
-                    UIFontDescriptor.FeatureKey.typeIdentifier: kLowerCaseSmallCapsSelector
-                ]
-            ]
-        ])
-        let titleFont = UIFont(descriptor: smallCapsDesc, size: 16.0)
-
-        guard let index = string.firstIndex(of: "\n") else {
-//            return NSAttributedString(string: string, attributes: [NSAttributedString.Key.font : bodyAttributes])
-            return NSAttributedString(string: string.lowercased(with: .current),
-                                      attributes: [NSAttributedString.Key.font : titleFont])
-        }
-
-        let title = String(string[..<index]).lowercased(with: .current)
-        let body = String(string[index...])
-
-        let titleBody = NSMutableAttributedString(string: title + body, attributes: bodyAttributes)
-        titleBody.addAttribute(NSAttributedString.Key.font, value: titleFont, range: NSRange(location: 0, length: title.count))
-
-        return titleBody
-    }
-
 }
 
 struct NoteDetailView_Previews: PreviewProvider {
