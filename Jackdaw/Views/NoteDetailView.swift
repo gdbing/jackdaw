@@ -18,21 +18,26 @@ struct NoteDetailView: View {
     
     var body: some View {
         VStack {
-            if self.photoPickerImage != nil {
-                Image(uiImage: photoPickerImage!)
-                .resizable()
-                .scaledToFit()
-            } else if note?.imageData != nil {
-                Image(uiImage: note!.image!)
-                    .resizable()
-                    .scaledToFit()
+//            if self.photoPickerImage != nil {
+//                NavigationLink(destination: ImageView(image: note!.image!)) {
+//                    Image(uiImage: photoPickerImage!)
+//                        .resizable()
+//                        .scaledToFit()
+//                }
+//            } else
+                if note?.imageData != nil {
+                    NavigationLink(destination: ImageView(image: note!.image!)) {
+                        Image(uiImage: note!.image!)
+                            .resizable()
+                            .scaledToFit()
+                    }
             }
             NoteTextFieldView(note: $note)
                 .padding()
         }
         .sheet(isPresented: $showPhotoPicker,
                onDismiss: updateNoteWithImage) {
-            PhotoPickerView(image: self.$photoPickerImage)
+                PhotoPickerView(image: self.$photoPickerImage)
         }
         .navigationBarItems(trailing: Button(action: {
             self.showPhotoPicker = true
@@ -54,7 +59,6 @@ struct NoteDetailView: View {
 struct NoteTextFieldView: UIViewRepresentable {
     @Environment(\.managedObjectContext) var managedObjectContext
     @Binding var note: Note?
-//    @Binding var image: UIImage?
 
     func makeUIView(context: UIViewRepresentableContext<NoteTextFieldView>) -> UITextView{
         let view = UITextView()
