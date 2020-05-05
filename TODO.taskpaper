@@ -1,0 +1,29 @@
+
+- text styling
+	- first line is title @done
+		- smallcaps @done
+		- bold? @done
+	- bigger gap between newlines than line breaks @done
+	- preserve uppercase letters while converting all to lowercase
+	- match styling to listview
+- archive
+	- separate view
+	- swipe right from All Notes
+	- question: how should archive be sorted? 
+- photos
+	- single photo @done
+	- at the top of detailview @done
+	- thumbnail in listview (clipped : https://www.simpleswiftguide.com/swiftui-image-tutorial/ ) @done
+	- stored @done
+	- deletable
+	- tap image to bring it up. zoom in or pan or whatever
+	
+- search
+	- pull down listview
+
+- fix occasional crash related to save() 
+	- maybe its something to do with being on main thread?
+	- maybe its something to do with the simulator?
+	
+- swipe down to hide keyboard
+- tap to bring up keyboard and insert cursor at point of tap
