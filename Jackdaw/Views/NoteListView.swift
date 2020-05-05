@@ -20,7 +20,7 @@ struct NoteListView: View {
             List {
                 ForEach(notes) { note in
                     NavigationLink(destination: NoteDetailView(note: note)) {
-                        NoteListRowView(note: note)
+                        ListRowView(note: note)
                     }
                 }
                 .onDelete { (indexSet) in
@@ -40,24 +40,34 @@ struct NoteListView: View {
     }
 }
 
-struct NoteListRowView: View {
+struct ListRowView: View {
     @ObservedObject var note: Note
     
     var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: .none) {
-                Text(note.headline)
-                    .font(Font.system(.headline).smallCaps())
-                Text(note.body)
-                    .font(Font.system(.subheadline))
-                    .lineLimit(2)
-            }
+        HStack() {
+            RowLabelView(text: note.text)
             if note.thumbnail != nil {
                 Spacer()
                 Image(uiImage: note.thumbnail!)
             }
         }
     }
+    
+    struct RowLabelView: UIViewRepresentable {
+        let text: String
+
+        func makeUIView(context: Context) -> UILabel {
+            let label = UILabel()
+            label.numberOfLines = 3
+            label.attributedText = Typography.attributedStringFrom(string: self.text)
+            return label
+        }
+        
+        func updateUIView(_ uiView: UILabel, context: UIViewRepresentableContext<ListRowView.RowLabelView>) {
+        }
+
+    }
+
 }
 
 struct NoteListView_Previews: PreviewProvider {
