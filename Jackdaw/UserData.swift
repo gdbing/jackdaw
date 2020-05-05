@@ -17,7 +17,6 @@ class UserData {
         newNote.text = ""
         newNote.id = UUID()
         newNote.sortDate = Date()
-        self.save()
         return newNote
     }
     
@@ -46,4 +45,35 @@ class UserData {
         // https://fluffy.es/store-image-coredata/
         return ""
     }
+    
+    func fakePreviewData() {
+        if self.entityIsEmpty(entity: "Note") {
+            let n1 = self.newNote()
+            n1.text = "A thousand bees\nfilling your mouth and nostrils\netc etc"
+            let n2 = self.newNote()
+            n2.text = "hamboning"
+            let n3 = self.newNote()
+            n3.text = "ONE two THREE four"
+        }
+    }
+    
+    func entityIsEmpty(entity: String) -> Bool
+    {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+        
+        var count = -1
+        do {
+            try self.context.fetch(request)
+            count = try context.count(for: request)
+        } catch {
+            print("Error: \(error)")
+        }
+        
+        if count == 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
 }

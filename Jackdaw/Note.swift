@@ -25,7 +25,15 @@ public class Note: NSManagedObject, Identifiable {
     @NSManaged private var thumbnailData: Data?
     
     lazy var headline: String = String(text.trimmingCharacters(in: .whitespaces).split(separator: "\n").first ?? "")
-    
+    var body: String {
+        get {
+            guard let newlineIndex = text.trimmingCharacters(in: .whitespaces).firstIndex(of: "\n") else {
+                return ""
+            }
+            return String(text.trimmingCharacters(in: .whitespaces)[newlineIndex...].trimmingCharacters(in: .whitespaces))
+        }
+    }
+
     var image: UIImage? {
         set {
             guard let newValue = newValue else {

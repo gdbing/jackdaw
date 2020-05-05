@@ -45,9 +45,13 @@ struct NoteListRowView: View {
     
     var body: some View {
         HStack {
-            Text(note.headline)
-                .lineLimit(2)
-                .font(Font.system(.headline).smallCaps())
+            VStack(alignment: .leading, spacing: .none) {
+                Text(note.headline)
+                    .font(Font.system(.headline).smallCaps())
+                Text(note.body)
+                    .font(Font.system(.subheadline))
+                    .lineLimit(2)
+            }
             if note.thumbnail != nil {
                 Spacer()
                 Image(uiImage: note.thumbnail!)
@@ -59,6 +63,7 @@ struct NoteListRowView: View {
 struct NoteListView_Previews: PreviewProvider {
     static var previews: some View {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        UserData().fakePreviewData()
         return NoteListView().environment(\.managedObjectContext, context)
     }
 }

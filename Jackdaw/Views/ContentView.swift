@@ -13,10 +13,13 @@ struct ContentView: View {
         NoteListView()
     }
 }
-
+#if DEBUG
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        UserData().fakePreviewData()
+        
         return ContentView().environment(\.managedObjectContext, context)
     }
 }
+#endif
