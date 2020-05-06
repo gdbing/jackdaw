@@ -12,7 +12,7 @@ import UIKit
 fileprivate var savedRecently: Bool = false
 
 struct NoteDetailView: View {
-    @State var note: Note?
+    @ObservedObject var note: Note
     @State private var showPhotoPicker: Bool = false
     @State private var photoPickerImage: UIImage?
     
@@ -25,14 +25,14 @@ struct NoteDetailView: View {
 //                        .scaledToFit()
 //                }
 //            } else
-                if note?.imageData != nil {
-                    NavigationLink(destination: ImageView(image: note!.image!)) {
-                        Image(uiImage: note!.image!)
+                if note.imageData != nil {
+//                    NavigationLink(destination: ImageView(image: note!.image!)) {
+                        Image(uiImage: note.image!)
                             .resizable()
                             .scaledToFit()
-                    }
+//                    }
             }
-            NoteTextFieldView(note: $note)
+            NoteTextFieldView(note: note)
                 .padding()
         }
         .sheet(isPresented: $showPhotoPicker,
@@ -50,19 +50,18 @@ struct NoteDetailView: View {
         guard let newImage = self.photoPickerImage else {
             return
         }
-        self.note = self.note ?? UserData().newNote()
-        self.note!.image = newImage
+        self.note.image = newImage
         UserData().save()
     }
 }
 
 struct NoteTextFieldView: UIViewRepresentable {
     @Environment(\.managedObjectContext) var managedObjectContext
-    @Binding var note: Note?
+    @ObservedObject var note: Note
 
     func makeUIView(context: UIViewRepresentableContext<NoteTextFieldView>) -> UITextView{
         let view = UITextView()
-        let text = self.note?.text ?? ""
+        let text = self.note.text
         view.attributedText = Typography.attributedStringFrom(string: text)
         view.isEditable = true
         view.backgroundColor = .clear
@@ -87,15 +86,12 @@ struct NoteTextFieldView: UIViewRepresentable {
         }
         
         func textViewDidBeginEditing(_ textView: UITextView) {
-            if self.parent.note == nil {
-                self.parent.note = UserData().newNote()
-            }
         }
         
         func textViewDidEndEditing(_ textView: UITextView) {
             if textView.text == "" {
                 print("textViewDidEndEditing deleted empty note")
-                UserData().delete(note: self.parent.note!)
+                UserData().delete(note: self.parent.note)
             } else {
                 print("textViewDidEndEditing saved: \(String(describing: textView.text))")
                 UserData().save()
@@ -104,7 +100,7 @@ struct NoteTextFieldView: UIViewRepresentable {
         
         func textViewDidChange(_ textView: UITextView) {
             // probably don't need this if we're not just passing the text on somewhere else
-            self.parent.note!.text = textView.text
+            self.parent.note.text = textView.text
             textView.attributedText = Typography.attributedStringFrom(string: textView.text)
             
             if savedRecently { return }

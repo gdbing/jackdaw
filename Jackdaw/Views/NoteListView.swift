@@ -18,7 +18,7 @@ struct NoteListView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(notes) { note in
+                ForEach(notes.filter({ $0.text != "" })) { note in
                     NavigationLink(destination: NoteDetailView(note: note)) {
                         ListRowView(note: note)
                     }
@@ -30,10 +30,10 @@ struct NoteListView: View {
             }
             .navigationBarTitle(Text("Jackdaw"), displayMode: .inline)
             .navigationBarItems(leading: NavigationLink(
-                destination: NoteDetailView(note: nil),
+                destination: NoteDetailView(note: UserData().newNote()),
                 label: { Image(systemName: "archivebox") }
                 ), trailing: NavigationLink(
-                    destination: NoteDetailView(note: nil),
+                    destination: NoteDetailView(note: UserData().newNote()),
                     label: { Image(systemName: "square.and.pencil") }
             ))
         }
@@ -64,16 +64,17 @@ struct ListRowView: View {
         @ObservedObject var note: Note
         let lines: Int
         let width: CGFloat // this is problematic
-
+        
         func makeUIView(context: Context) -> UILabel {
             let label = UILabel()
-            label.preferredMaxLayoutWidth = width
+            label.preferredMaxLayoutWidth = width // This doesn't work as expected. The width you pass in doesn't correspond to the width the text actually arranges itself in
             label.numberOfLines = self.lines
             label.attributedText = Typography.attributedStringFrom(string: self.note.text)
             return label
         }
         
         func updateUIView(_ uiView: UILabel, context: UIViewRepresentableContext<ListRowView.RowLabelView>) {
+            uiView.attributedText = Typography.attributedStringFrom(string: self.note.text)
         }
 
     }
