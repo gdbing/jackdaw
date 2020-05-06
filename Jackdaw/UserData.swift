@@ -48,6 +48,8 @@ class UserData {
     
     func fakePreviewData() {
         if self.entityIsEmpty(entity: "Note") {
+            let n0 = self.newNote()
+            n0.text = "Jackdaw\nA fine grey and black bird with pale eyes, related to but smaller than the carrion crow.\nThough thievish and mischievous to the farmer, the jackdaw is a curious and intelligent bird. It has been observed using tools for complex problem solving, like its Corvid cousins.\nThe jackdaw collects and decorates its nest with bright objects. Owing to its fondness for picking up coins, Linnaeus gave it the binomial name Corvus monedula, mǒnēdŭla being derived from the Latin stem of \"money\".\nThe collective noun for a group is a \"clattering\" of jackdaws. The jackdaw call is a familiar hard 'tchack' from which it gets its name. They are gregarious and vocal birds and live in small groups with complex social structures. It will commonly nest in chimneys, buildings, rock crevices and tree holes."
             let n1 = self.newNote()
             n1.text = "A thousand bees\nfilling your mouth and nostrils\netc etc"
             let n2 = self.newNote()

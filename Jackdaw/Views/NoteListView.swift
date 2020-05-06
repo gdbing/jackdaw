@@ -45,21 +45,31 @@ struct ListRowView: View {
     
     var body: some View {
         HStack() {
-            RowLabelView(text: note.text)
+//            GeometryReader { geometry in
+//                RowLabelView(text: self.note.text, lines: 3, width: geometry.size.width)
+//                    .frame(width: geometry.size.width,
+//                           height: geometry.size.height,
+//                           alignment: .topLeading)
+//            }
+            RowLabelView(note: self.note, lines: 3, width: 100.0)
             if note.thumbnail != nil {
                 Spacer()
                 Image(uiImage: note.thumbnail!)
             }
         }
+
     }
     
     struct RowLabelView: UIViewRepresentable {
-        let text: String
+        @ObservedObject var note: Note
+        let lines: Int
+        let width: CGFloat // this is problematic
 
         func makeUIView(context: Context) -> UILabel {
             let label = UILabel()
-            label.numberOfLines = 3
-            label.attributedText = Typography.attributedStringFrom(string: self.text)
+            label.preferredMaxLayoutWidth = width
+            label.numberOfLines = self.lines
+            label.attributedText = Typography.attributedStringFrom(string: self.note.text)
             return label
         }
         

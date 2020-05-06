@@ -5,7 +5,7 @@
 		- bold? @done
 	- bigger gap between newlines than line breaks @done
 	- preserve uppercase letters while converting all to lowercase
-	- match styling to listview
+	- match styling to listview @done
 - archive
 	- separate view
 	- swipe right from All Notes
