@@ -25,6 +25,7 @@ final class UserData {
         if emptyNote != nil && emptyNote!.text == "" {
             return emptyNote!
         } else {
+//            self.deleteAllEmptyNotes()
             let newNote = Note(context:context)
             newNote.text = ""
             newNote.id = UUID()
@@ -54,6 +55,17 @@ final class UserData {
         }
     }
     
+    func deleteAllEmptyNotes() {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
+        fetchRequest.predicate = NSPredicate(format: "text == ''")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        do {
+            try context.execute(deleteRequest)
+        } catch let error as NSError {
+            print ("error with deleteAllEmptyNotes: \(error)")
+        }
+    }
+
     func storeUIImage(image: UIImage) -> String {
         // return the reference name
         // https://fluffy.es/store-image-coredata/
