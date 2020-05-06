@@ -18,7 +18,7 @@ public class Note: NSManagedObject, Identifiable {
     }
     
     @NSManaged public var text: String
-    @NSManaged public var id: UUID
+    @NSManaged public var id: UUID?
     @NSManaged public var sortDate: Date
     
     @NSManaged public var imageData: Data?
