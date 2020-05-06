@@ -11,14 +11,15 @@ import SwiftUI
 struct NoteListView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(entity: Note.entity(),
-                  sortDescriptors: [NSSortDescriptor(keyPath: \Note.sortDate, ascending: false)])
+                  sortDescriptors: [NSSortDescriptor(keyPath: \Note.sortDate, ascending: false)],
+                  predicate: NSPredicate(format: "text != ''"))
     var notes: FetchedResults<Note>
     // consider moving notes into UserData()
 
     var body: some View {
         NavigationView {
             List {
-                ForEach(notes.filter({ $0.text != "" })) { note in
+                ForEach(notes) { note in
                     NavigationLink(destination: NoteDetailView(note: note)) {
                         ListRowView(note: note)
                     }
