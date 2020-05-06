@@ -17,13 +17,14 @@
 	- stored @done
 	- deletable
 	- tap image to bring it up. zoom in or pan or whatever
+	- bug: photos are often misoriented?! (upside down, sideways)
 	
 - search
 	- pull down listview
 
-- fix occasional crash related to save() 
-	- maybe its something to do with being on main thread?
-	- maybe its something to do with the simulator?
+- fix occasional crash related to save() @done
+	- maybe its something to do with being on main thread? @done
+	- maybe its something to do with the simulator? @done
 	
 - swipe down to hide keyboard
 - tap to bring up keyboard and insert cursor at point of tap
