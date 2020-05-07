@@ -32,7 +32,7 @@ struct NoteView: View {
     
     var body: some View {
         VStack {
-            Text(note.id!.uuidString.split(separator: "-").last!).font(.headline)
+//            Text(note.id!.uuidString.split(separator: "-").last!).font(.headline)
                 if note.imageData != nil {
 //                    NavigationLink(destination: ImageView(image: note!.image!)) {
                         Image(uiImage: note.image!)
