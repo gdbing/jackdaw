@@ -9,32 +9,17 @@
 import CoreData
 import UIKit
 
-private var emptyNote: Note? = nil
-
 final class UserData {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     func newNote() -> Note {
-        /*
-         this seems insane. We want to be able to use newNote in a SwiftUI view, but everytime the view refreshes, a new note gets created
-         this lets us only create a new note if we need one
-         TODO filter the empty note out of list of notes
-         TODO clean up empty notes, or store empty note in a plist or seomthing so we can track it between launches...
-         TODO find a better solution than this
-         */
-        if emptyNote != nil && emptyNote!.text == "" {
-            return emptyNote!
-        } else {
-//            self.deleteAllEmptyNotes()
-            let newNote = Note(context:context)
-            newNote.text = ""
-            newNote.id = UUID()
-            newNote.sortDate = Date()
-            emptyNote = newNote
-            return newNote
-        }
+        let newNote = Note(context:context)
+        newNote.text = ""
+        newNote.id = UUID()
+        newNote.sortDate = Date()
+        return newNote
     }
-    
+
     func save() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.saveContext()

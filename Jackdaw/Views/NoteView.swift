@@ -11,20 +11,28 @@ import UIKit
 
 fileprivate var savedRecently: Bool = false
 
-struct NoteDetailView: View {
+struct NewNoteView: View {
+    @State var note: Note?
+    var body: some View {
+        VStack {
+            if note != nil {
+                NoteView(note: note!)
+            }
+        }
+        .onAppear(perform: {
+            self.note = UserData().newNote()
+        })
+    }
+}
+
+struct NoteView: View {
     @ObservedObject var note: Note
     @State private var showPhotoPicker: Bool = false
     @State private var photoPickerImage: UIImage?
     
     var body: some View {
         VStack {
-//            if self.photoPickerImage != nil {
-//                NavigationLink(destination: ImageView(image: note!.image!)) {
-//                    Image(uiImage: photoPickerImage!)
-//                        .resizable()
-//                        .scaledToFit()
-//                }
-//            } else
+            Text(note.id!.uuidString.split(separator: "-").last!).font(.headline)
                 if note.imageData != nil {
 //                    NavigationLink(destination: ImageView(image: note!.image!)) {
                         Image(uiImage: note.image!)
@@ -50,6 +58,7 @@ struct NoteDetailView: View {
         guard let newImage = self.photoPickerImage else {
             return
         }
+        self.photoPickerImage = nil
         self.note.image = newImage
         UserData().save()
     }
@@ -108,7 +117,7 @@ struct NoteTextFieldView: UIViewRepresentable {
             savedRecently = true
             Timer.scheduledTimer(withTimeInterval: 1, repeats: false) {_ in
                 UserData().save()
-                print("textViewDidChange saved: \(String(describing: textView.text))")
+                print("textViewDidChange saved: \(textView.text!)\n\(self.parent.note.id!.uuidString)")
                 savedRecently = false
             }
         }

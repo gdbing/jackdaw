@@ -20,7 +20,7 @@ struct NoteListView: View {
         NavigationView {
             List {
                 ForEach(notes) { note in
-                    NavigationLink(destination: NoteDetailView(note: note)) {
+                    NavigationLink(destination: NoteView(note: note)) {
                         ListRowView(note: note)
                     }
                 }
@@ -29,12 +29,12 @@ struct NoteListView: View {
                     UserData().delete(note: noteToDelete)
                 }
             }
-            .navigationBarTitle(Text("Jackdaw"), displayMode: .inline)
+            .navigationBarTitle(Text("Jackdaw \(notes.count)"), displayMode: .inline)
             .navigationBarItems(leading: NavigationLink(
-                destination: NoteDetailView(note: UserData().newNote()),
+                destination: Text("this is a filler view"),
                 label: { Image(systemName: "archivebox") }
                 ), trailing: NavigationLink(
-                    destination: NoteDetailView(note: UserData().newNote()),
+                    destination: NewNoteView(),
                     label: { Image(systemName: "square.and.pencil") }
             ))
         }
