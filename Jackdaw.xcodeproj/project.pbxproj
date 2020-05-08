@@ -21,6 +21,7 @@
 		BFE8FF5A245FFFB9007BA3F7 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE8FF59245FFFB9007BA3F7 /* UserData.swift */; };
 		BFE8FF6F2460F5AF007BA3F7 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE8FF6E2460F5AF007BA3F7 /* ImageView.swift */; };
 		BFE8FF7424622DF7007BA3F7 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE8FF7324622DF7007BA3F7 /* Typography.swift */; };
+		BFE8FFD12466187A007BA3F7 /* NavigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE8FFD02466187A007BA3F7 /* NavigationButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		BFE8FF59245FFFB9007BA3F7 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		BFE8FF6E2460F5AF007BA3F7 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		BFE8FF7324622DF7007BA3F7 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
+		BFE8FFD02466187A007BA3F7 /* NavigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				BF4053C7245B8F5D00C681DF /* NoteView.swift */,
 				BFE8FF57245FF44B007BA3F7 /* PhotoPickerView.swift */,
 				BFE8FF6E2460F5AF007BA3F7 /* ImageView.swift */,
+				BFE8FFD02466187A007BA3F7 /* NavigationButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 				BF4053B0245B87FF00C681DF /* Jackdaw.xcdatamodeld in Sources */,
 				BF4053C8245B8F5D00C681DF /* NoteView.swift in Sources */,
 				BFE8FF58245FF44B007BA3F7 /* PhotoPickerView.swift in Sources */,
+				BFE8FFD12466187A007BA3F7 /* NavigationButton.swift in Sources */,
 				BF4053C2245B88CD00C681DF /* NoteListView.swift in Sources */,
 				BF4053C5245B8A3200C681DF /* Note.swift in Sources */,
 				BF4053B2245B87FF00C681DF /* ContentView.swift in Sources */,
