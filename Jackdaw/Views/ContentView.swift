@@ -11,6 +11,11 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NoteListView()
+            .onAppear(perform: {
+                // Don't show the lines between items in list view
+                UITableView.appearance().separatorStyle = .none
+
+            })
     }
 }
 #if DEBUG
