@@ -30,13 +30,35 @@ struct NoteListView: View {
                 }
             }
             .navigationBarTitle(Text("Jackdaw \(notes.count)"), displayMode: .inline)
-            .navigationBarItems(leading: NavigationLink(
-                destination: Text("this is a filler view"),
-                label: { Image(systemName: "archivebox") }
-                ), trailing: NavigationLink(
-                    destination: NewNoteView(),
-                    label: { Image(systemName: "square.and.pencil") }
-            ))
+            .navigationBarItems(leading: ArchiveButton(),
+                                trailing: NewNoteButton()
+            )
+        }
+    }
+}
+
+struct ArchiveButton: View {
+    var body: some View {
+        NavigationLink(destination: Text("this is a filler view"),
+                       label: { Image(systemName: "archivebox")})
+    }
+}
+
+struct NewNoteButton: View {
+    @State var isActive = false
+    @State var note: Note?
+    
+    var body: some View {
+        ZStack {
+            if note != nil {
+                NavigationLink(destination: NoteView(note: note!), isActive: self.$isActive) { Text("") }
+            }
+            Button(action: {
+                self.note = UserData().newNote()
+                self.isActive = true
+            }) {
+                Image(systemName: "square.and.pencil")
+            }
         }
     }
 }
@@ -68,7 +90,7 @@ struct ListRowView: View {
         
         func makeUIView(context: Context) -> UILabel {
             let label = UILabel()
-            label.preferredMaxLayoutWidth = width // This doesn't work as expected. The width you pass in doesn't correspond to the width the text actually arranges itself in
+            label.preferredMaxLayoutWidth = width // This doesn't work as I expected. The width you pass in doesn't match the width the text fits itself to
             label.numberOfLines = self.lines
             label.attributedText = Typography.attributedStringFrom(string: self.note.text)
             return label

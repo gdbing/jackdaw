@@ -11,20 +11,6 @@ import UIKit
 
 fileprivate var savedRecently: Bool = false
 
-struct NewNoteView: View {
-    @State var note: Note?
-    var body: some View {
-        VStack {
-            if note != nil {
-                NoteView(note: note!)
-            }
-        }
-        .onAppear(perform: {
-            self.note = UserData().newNote()
-        })
-    }
-}
-
 struct NoteView: View {
     @ObservedObject var note: Note
     @State private var showPhotoPicker: Bool = false
