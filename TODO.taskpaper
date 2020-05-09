@@ -15,7 +15,7 @@
 	- at the top of detailview @done
 	- thumbnail in listview (clipped : https://www.simpleswiftguide.com/swiftui-image-tutorial/ ) @done
 	- stored @done
-	- imageview. tap image to zoom it up
+	- imageview. tap image to zoom it up @done
 		- deletable
 		- swipe down to dismiss
 	- bug: photos are often misoriented?! don't store orientation data in conversion from uiimage to nsdata
@@ -25,7 +25,6 @@
 	- pull down listview
 - buttons
 	- bigger tap targets
-- archive view
 - fix occasional crash related to save() @done
 	- maybe its something to do with being on main thread? @done
 	- maybe its something to do with the simulator? @done
