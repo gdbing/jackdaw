@@ -8,29 +8,22 @@
 
 import SwiftUI
 
-typealias Destination<V> = Group<V> where V:View
-typealias Label<V> = Group<V> where V:View
-
-struct NavigationButton<V1, V2>: View where V1: View, V2: View {
-    @State private var isActive = false
-    @State private var n = 0
-    private var action: ()->Void
-        
-    let destination: Group<V1>
-    let label: Group<V2>
-
-    init(action: @escaping () -> Void, @ViewBuilder _ content: @escaping () -> TupleView<(Destination<V1>, Label<V2>)>) {
+struct NavigationButton<Label, Destination> : View where Label : View, Destination : View {
+    let label: Label
+    let destination: Destination
+    let action: () -> Void
+    @State var isActive = false
+    
+    init(action: @escaping () -> Void, destination: Destination, @ViewBuilder label: () -> Label) {
         self.action = action
-        let (destination, label) = content().value
         self.destination = destination
-        self.label = label
+        self.label = label()
     }
     
-    init(@ViewBuilder _ content: @escaping () -> TupleView<(Destination<V1>, Label<V2>)>) {
+    init(destination: Destination, @ViewBuilder label: () -> Label) {
         self.action = {}
-        let (destination, label) = content().value
         self.destination = destination
-        self.label = label
+        self.label = label()
     }
     
     var body: some View {
@@ -50,38 +43,26 @@ struct NavigationButton<V1, V2>: View where V1: View, V2: View {
 }
 
 struct NavigationButton_Preview: PreviewProvider {
-    @State var clickCounter = 0
-    
     static var previews: some View {
         NavigationView {
             VStack {
                 Spacer()
-                NavigationButton(action: {
-                    print("clicked the pencil button")
-                }) {
-                    Destination {
-                        Text("WRITE ON DUDE!!")
-                    }
-                    Label {
-                        Image(systemName: "pencil.circle")
-                            .resizable()
-                            .frame(width: 64, height: 64)
-                    }
-                }
+                NavigationButton(action: { },
+                                 destination: Text("WRITE ON DUDE!!"),
+                                 label: { Image(systemName: "pencil.circle")
+                                    .resizable()
+                                    .frame(width: 64, height: 64)
+                })
+                
                 Spacer()
-                NavigationButton {
-                    Destination {
-                        HStack{
-                            Image(systemName: "trash.fill")
-                            Text("WELCOME HOME")
-                        }
-                    }
-                    Label {
-                        Image(systemName: "trash.circle")
-                            .resizable()
-                            .frame(width: 64, height: 64)
-                    }
-                }
+                NavigationButton(destination: HStack{
+                                    Image(systemName: "trash.fill")
+                                    Text("WELCOME HOME")
+                                    },
+                                 label: { Image(systemName: "trash.circle")
+                                    .resizable()
+                                    .frame(width: 64, height: 64)
+                })
                 Spacer()
             }
         }
