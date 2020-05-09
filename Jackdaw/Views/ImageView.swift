@@ -13,19 +13,18 @@ struct ImageView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Spacer()
-                Button(action: deleteImage) {
-                    Image(systemName: "trash")
-                    .padding()
-                }
-            }
             Spacer()
             Image(uiImage: image)
                 .resizable()
                 .scaledToFit()
             Spacer()
-        }
+        }.navigationBarItems(trailing:  Button(action: deleteImage) {
+            Image(systemName: "trash")
+                .resizable()
+                .frame(width: 24, height: 24)
+                .padding()
+            }
+        )
     }
     func deleteImage() {
         
