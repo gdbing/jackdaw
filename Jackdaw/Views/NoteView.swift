@@ -34,11 +34,11 @@ struct NoteView: View {
         VStack {
 //            Text(note.id!.uuidString.split(separator: "-").last!).font(.headline)
                 if note.imageData != nil {
-//                    NavigationLink(destination: ImageView(image: note!.image!)) {
+                    NavigationLink(destination: ImageView(image: note.image!)) {
                         Image(uiImage: note.image!)
                             .resizable()
                             .scaledToFit()
-//                    }
+                    }.buttonStyle(PlainButtonStyle())
             }
             NoteTextFieldView(note: note)
                 .padding()
