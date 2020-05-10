@@ -15,11 +15,13 @@ struct NoteListView: View {
                   predicate: NSPredicate(format: "text != ''"))
     var notes: FetchedResults<Note>
     // consider moving notes into UserData()
+    @State var searchText = ""
 
     var body: some View {
         NavigationView {
             List {
-                ForEach(notes) { note in
+                SearchBar(text: $searchText)
+                ForEach(notes.filter({ searchText.isEmpty ? true : $0.text.contains(searchText)})) { note in
                     NavigationLink(destination: NoteView(note: note)) {
                         ListRowView(note: note)
                     }
