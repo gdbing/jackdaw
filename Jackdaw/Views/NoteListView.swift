@@ -27,7 +27,7 @@ struct NoteListView: View {
                     }
                 }
                 .onDelete { (indexSet) in
-                    let noteToDelete = self.notes[indexSet.first!]
+                    let noteToDelete = self.notes.filter({ self.searchText.isEmpty ? true : $0.text.contains(self.searchText)})[indexSet.first!]
                     UserData().delete(note: noteToDelete)
                 }
             }
