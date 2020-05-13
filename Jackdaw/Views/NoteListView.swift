@@ -14,28 +14,36 @@ struct NoteListView: View {
                   sortDescriptors: [NSSortDescriptor(keyPath: \Note.sortDate, ascending: false)],
                   predicate: NSPredicate(format: "text != ''"))
     var notes: FetchedResults<Note>
-    // consider moving notes into UserData()
-    @State var searchText = ""
 
+    @State var searchText = ""
+    
     var body: some View {
         NavigationView {
-            List {
-                SearchBar(text: $searchText)
-                ForEach(notes.filter({ searchText.isEmpty ? true : $0.text.contains(searchText)})) { note in
-                    NavigationLink(destination: NoteView(note: note)) {
-                        ListRowView(note: note)
+//            ScrollView {
+//                VStack {
+//                    SearchBar(text: $searchText)
+                    List {
+                        Section {
+                            SearchBar(text: $searchText)
+                        }
+                        ForEach(notes.filter({ searchText.isEmpty ? true : $0.text.contains(searchText)})) { note in
+                            NavigationLink(destination: NoteView(note: note)) {
+                                ListRowView(note: note)
+                            }
+                        }
+                        .onDelete { (indexSet) in
+                            let noteToDelete = self.notes.filter({ self.searchText.isEmpty ? true : $0.text.contains(self.searchText)})[indexSet.first!]
+                            UserData().delete(note: noteToDelete)
+                        }
                     }
+                    .navigationBarTitle(Text("Jackdaw \(notes.count)"), displayMode: .inline)
+                    .navigationBarItems(leading: ArchiveButton(),
+                                        trailing: NewNoteButton()
+                    )
+                        .offset(y: -50)
                 }
-                .onDelete { (indexSet) in
-                    let noteToDelete = self.notes.filter({ self.searchText.isEmpty ? true : $0.text.contains(self.searchText)})[indexSet.first!]
-                    UserData().delete(note: noteToDelete)
-                }
-            }
-            .navigationBarTitle(Text("Jackdaw \(notes.count)"), displayMode: .inline)
-            .navigationBarItems(leading: ArchiveButton(),
-                                trailing: NewNoteButton()
-            )
-        }
+//            }
+//        }
     }
 }
 
