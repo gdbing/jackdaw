@@ -22,9 +22,13 @@
 	- better thumbnails
 	
 - search
+	- filters list of notes @done
+	- bug: x button doesn't work
+	- bug: deleting filtered list is messed up @done
 	- pull down listview
+	
 - buttons
-	- bigger tap targets
+	- bigger tap targets 
 - fix occasional crash related to save() @done
 	- maybe its something to do with being on main thread? @done
 	- maybe its something to do with the simulator? @done
