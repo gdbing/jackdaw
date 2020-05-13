@@ -17,28 +17,32 @@ struct NoteView: View {
     @State private var photoPickerImage: UIImage?
     
     var body: some View {
-        VStack {
-//            Text(note.id!.uuidString.split(separator: "-").last!).font(.headline)
-                if note.imageData != nil {
-                    NavigationLink(destination: ImageView(image: note.image!)) {
-                        Image(uiImage: note.image!)
-                            .resizable()
-                            .scaledToFit()
-                    }.buttonStyle(PlainButtonStyle())
-            }
-            NoteTextFieldView(note: note)
-                .padding()
-        }
-        .sheet(isPresented: $showPhotoPicker,
-               onDismiss: updateNoteWithImage) {
-                PhotoPickerView(image: self.$photoPickerImage)
-        }
-        .navigationBarItems(trailing: Button(action: {
-            self.showPhotoPicker = true
-        }) {
-            Image(systemName: "photo")
-            }
-        )
+//        ScrollView {
+//            GeometryReader { proxy in
+//                VStack {
+//                    if self.note.imageData != nil {
+//                        NavigationLink(destination: ImageView(image: self.note.image!)) {
+//                            Image(uiImage: self.note.image!)
+//                                .resizable()
+//                                //                            .scaledToFit()
+//                                .frame(width:proxy.size.width)
+//                        }.buttonStyle(PlainButtonStyle())
+//                    }
+                    NoteTextFieldView(note: self.note)
+                        .padding()
+//                }
+//                .sheet(isPresented: self.$showPhotoPicker,
+//                       onDismiss: self.updateNoteWithImage) {
+//                        PhotoPickerView(image: self.$photoPickerImage)
+//                }
+//                .navigationBarItems(trailing: Button(action: {
+//                    self.showPhotoPicker = true
+//                }) {
+//                    Image(systemName: "photo")
+//                    }
+//                )
+//            }
+//        }
     }
     func updateNoteWithImage() {
         guard let newImage = self.photoPickerImage else {
@@ -61,6 +65,7 @@ struct NoteTextFieldView: UIViewRepresentable {
         view.isEditable = true
         view.backgroundColor = .clear
         view.delegate = context.coordinator
+        view.keyboardDismissMode = .interactive
         return view
     }
     
