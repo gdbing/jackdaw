@@ -10,14 +10,16 @@ import SwiftUI
 
 struct ContentView: View {
     @State var searchString: String = ""
-
+    
     var body: some View {
         NavigationView {
-            SearchListScrollView(searchString: $searchString) {
-                NoteListView(filteredBy: $searchString)
-            }
-            .onTapGesture {
+            VStack {
+                SearchListScrollView(searchString: self.$searchString) {
+                    NoteListView(filteredBy: self.$searchString)
+                }
+                .onTapGesture {
                     UIApplication.shared.dismissKeyboard()
+                }
             }
         }
     }

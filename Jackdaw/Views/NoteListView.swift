@@ -68,7 +68,6 @@ struct ListRowView: View {
     
     var body: some View {
         VStack {
-            NavigationLink(destination: NoteView(note:note), isActive: $isActive) { Text("") }
             Button(action: {
                 self.isActive = true
             }) {
@@ -81,9 +80,10 @@ struct ListRowView: View {
                 }
                 .padding(.horizontal)
             }
+            NavigationLink(destination: NoteView(note:note), isActive: $isActive) { Text("") }
             Spacer()
         }
-        .frame(maxHeight: 70.0)
+        .frame(maxHeight: 65.0)
     }
     
     struct RowLabelView: UIViewRepresentable {

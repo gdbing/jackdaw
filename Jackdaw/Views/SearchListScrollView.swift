@@ -10,6 +10,8 @@
 import SwiftUI
 
 struct SearchListScrollView<Content: View>: View {
+    @ObservedObject var keyboardResponder = KeyboardResponder()
+
     @State private var previousScrollOffset: CGFloat = 0
     @State private var isSearchBarShown: Bool = false
     @Binding var searchString: String
@@ -23,31 +25,46 @@ struct SearchListScrollView<Content: View>: View {
     }
     
     var body: some View {
-        ScrollView {
-            ZStack(alignment: .top) {
-                MovingView()
-                
-                self.content
-                .alignmentGuide(.top, computeValue: { d in
-                    self.isSearchBarShown ? -self.searchHeight : 0.0
+        GeometryReader { proxy in
+            VStack {
+                ScrollView {
+                    ZStack(alignment: .top) {
+                        MovingView()
+                        
+                        self.content
+                            .alignmentGuide(.top, computeValue: { d in
+                                self.isSearchBarShown ? -self.searchHeight : 0.0
+                            })
+                        
+                        SearchBarView(text: self.$searchString)
+                            .frame(height: self.searchHeight * 0.25)
+                            .padding(.vertical, self.searchHeight * 0.375)
+                            .offset(y: -self.searchHeight + (self.isSearchBarShown ? self.searchHeight : 0.0))
+                    }
+                }
+/*
+    keyboardResponder.currentHeight can be greater than the amount
+    of this view which is being obscured
+
+    `self.keyboardResponder.currentHeight - (UIScreen.main.bounds.size.height-proxy.frame(in: .global)`
+
+    accounts for the small gap at the bottom of the screen on OLED iPhones
+    which isn't used by this view, but is filled by the keyboard
+ */
+                .frame(maxHeight: proxy.size.height - max(self.keyboardResponder.currentHeight - (UIScreen.main.bounds.size.height-proxy.frame(in: .global).maxY), 0))
+                .background(FixedView())
+                .onPreferenceChange(KeyTypes.PrefKey.self) { values in
+                    if !self.isSearchBarShown {
+                        self.showSearchBarLogic(values: values)
+                    }
+                }
+                .onAppear(perform: {
+                    self.searchString = ""
+                    self.isSearchBarShown = false
                 })
-                
-                SearchBarView(text: self.$searchString)
-                    .frame(height: self.searchHeight * 0.25)
-                    .padding(.vertical, self.searchHeight * 0.375)
-                    .offset(y: -self.searchHeight + (isSearchBarShown ? self.searchHeight : 0.0))
+                Spacer()
             }
         }
-        .background(FixedView())
-        .onPreferenceChange(KeyTypes.PrefKey.self) { values in
-            if !self.isSearchBarShown {
-                self.showSearchBarLogic(values: values)
-            }
-        }
-        .onAppear(perform: {
-            self.searchString = ""
-            self.isSearchBarShown = false
-        })
     }
     
     func showSearchBarLogic(values: [KeyTypes.PrefData]) {
