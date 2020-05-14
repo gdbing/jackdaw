@@ -13,14 +13,14 @@ struct SearchListScrollView<Content: View>: View {
     @State private var previousScrollOffset: CGFloat = 0
     
     @State private var isSearchShown: Bool = false
-    @State private var searchString: String = ""
+    @Binding var searchString: String
     private let searchHeight: CGFloat
     let content: Content
     
-    init(height: CGFloat = 70, @ViewBuilder content: () -> Content) {
+    init(height: CGFloat = 60, searchString: Binding<String>, @ViewBuilder content: () -> Content) {
         self.searchHeight = height
+        self._searchString = searchString
         self.content = content()
-        
     }
     
     var body: some View {
@@ -57,7 +57,7 @@ struct SearchListScrollView<Content: View>: View {
             let fixedBounds = values.first { $0.vType == .fixedView }?.bounds ?? .zero
             let scrollOffset = movingBounds.minY - fixedBounds.minY
             
-            if self.previousScrollOffset > self.searchHeight + 8 && scrollOffset <= self.searchHeight + 8 {
+            if self.previousScrollOffset > self.searchHeight && scrollOffset <= self.searchHeight {
                 self.isSearchShown = true
             }
             

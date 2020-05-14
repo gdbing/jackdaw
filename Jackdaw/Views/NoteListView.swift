@@ -15,24 +15,24 @@ struct NoteListView: View {
                   predicate: NSPredicate(format: "text != ''"))
     var notes: FetchedResults<Note>
 
-    @State var searchText = ""
+    @Binding var filteredBy: String
     var showSearch = false
     
     var body: some View {
         VStack {
-            ForEach(notes.filter({ searchText.isEmpty ? true : $0.text.contains(searchText)})) { note in
+            ForEach(notes.filter({ filteredBy.isEmpty ? true : $0.text.contains(filteredBy)})) { note in
                 ListRowView(note: note)
             }
 //            .onDelete { (indexSet) in
 //                let noteToDelete = self.notes.filter({ self.searchText.isEmpty ? true : $0.text.contains(self.searchText)})[indexSet.first!]
 //                UserData().delete(note: noteToDelete)
-//            }
+            //            }
             Spacer()
         }
-                            .navigationBarTitle(Text("Jackdaw \(notes.count)"), displayMode: .inline)
-                            .navigationBarItems(leading: ArchiveButton(),
-                                                trailing: NewNoteButton()
-                            )
+        .navigationBarTitle(Text("Jackdaw \(notes.count)"), displayMode: .inline)
+        .navigationBarItems(leading: ArchiveButton(),
+                            trailing: NewNoteButton()
+        )
     }
 }
 
@@ -74,9 +74,9 @@ struct ListRowView: View {
             }) {
                 HStack() {
                     RowLabelView(note: self.note, lines: 3, width: 100.0)
+                    Spacer()
                     if note.thumbnail != nil {
-                        Spacer()
-                        Image(uiImage: note.thumbnail!)
+//                        Image(uiImage: note.thumbnail!)
                     }
                 }
                 .padding(.horizontal)
@@ -118,6 +118,6 @@ struct NoteListView_Previews: PreviewProvider {
     static var previews: some View {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         UserData().fakePreviewData()
-        return NoteListView().environment(\.managedObjectContext, context)
+        return NoteListView(filteredBy: .constant("")).environment(\.managedObjectContext, context)
     }
 }

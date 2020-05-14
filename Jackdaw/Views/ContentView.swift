@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var searchString: String = ""
+
     var body: some View {
 //        NoteListView()
 //            .onAppear(perform: {
@@ -17,12 +19,13 @@ struct ContentView: View {
         //
         //            })
         NavigationView {
-            SearchListScrollView() {
-                NoteListView()
+            SearchListScrollView(searchString: $searchString) {
+                NoteListView(filteredBy: $searchString)
             }
         }
     }
 }
+
 #if DEBUG
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
