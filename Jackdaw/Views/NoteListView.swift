@@ -16,34 +16,23 @@ struct NoteListView: View {
     var notes: FetchedResults<Note>
 
     @State var searchText = ""
+    var showSearch = false
     
     var body: some View {
-        NavigationView {
-//            ScrollView {
-//                VStack {
-//                    SearchBar(text: $searchText)
-                    List {
-                        Section {
-                            SearchBar(text: $searchText)
-                        }
-                        ForEach(notes.filter({ searchText.isEmpty ? true : $0.text.contains(searchText)})) { note in
-                            NavigationLink(destination: NoteView(note: note)) {
-                                ListRowView(note: note)
-                            }
-                        }
-                        .onDelete { (indexSet) in
-                            let noteToDelete = self.notes.filter({ self.searchText.isEmpty ? true : $0.text.contains(self.searchText)})[indexSet.first!]
-                            UserData().delete(note: noteToDelete)
-                        }
-                    }
-                    .navigationBarTitle(Text("Jackdaw \(notes.count)"), displayMode: .inline)
-                    .navigationBarItems(leading: ArchiveButton(),
-                                        trailing: NewNoteButton()
-                    )
-                        .offset(y: -50)
-                }
+        VStack {
+            ForEach(notes.filter({ searchText.isEmpty ? true : $0.text.contains(searchText)})) { note in
+                ListRowView(note: note)
+            }
+//            .onDelete { (indexSet) in
+//                let noteToDelete = self.notes.filter({ self.searchText.isEmpty ? true : $0.text.contains(self.searchText)})[indexSet.first!]
+//                UserData().delete(note: noteToDelete)
 //            }
-//        }
+            Spacer()
+        }
+                            .navigationBarTitle(Text("Jackdaw \(notes.count)"), displayMode: .inline)
+                            .navigationBarItems(leading: ArchiveButton(),
+                                                trailing: NewNoteButton()
+                            )
     }
 }
 
@@ -75,22 +64,26 @@ struct NewNoteButton: View {
 
 struct ListRowView: View {
     @ObservedObject var note: Note
+    @State var isActive = false
     
     var body: some View {
-        HStack() {
-//            GeometryReader { geometry in
-//                RowLabelView(text: self.note.text, lines: 3, width: geometry.size.width)
-//                    .frame(width: geometry.size.width,
-//                           height: geometry.size.height,
-//                           alignment: .topLeading)
-//            }
-            RowLabelView(note: self.note, lines: 3, width: 100.0)
-            if note.thumbnail != nil {
-                Spacer()
-                Image(uiImage: note.thumbnail!)
+        VStack {
+            NavigationLink(destination: NoteView(note:note), isActive: $isActive) { Text("") }
+            Button(action: {
+                self.isActive = true
+            }) {
+                HStack() {
+                    RowLabelView(note: self.note, lines: 3, width: 100.0)
+                    if note.thumbnail != nil {
+                        Spacer()
+                        Image(uiImage: note.thumbnail!)
+                    }
+                }
+                .padding(.horizontal)
             }
+            Spacer()
         }
-
+        .frame(maxHeight: 70.0)
     }
     
     struct RowLabelView: UIViewRepresentable {
@@ -109,9 +102,16 @@ struct ListRowView: View {
         func updateUIView(_ uiView: UILabel, context: UIViewRepresentableContext<ListRowView.RowLabelView>) {
             uiView.attributedText = Typography.attributedStringFrom(string: self.note.text)
         }
-
     }
+}
 
+struct ListRowSearchView: View {
+    @ObservedObject var note: Note
+    private let searchString: String
+    
+    var body: some View {
+        ListRowView(note: note)
+    }
 }
 
 struct NoteListView_Previews: PreviewProvider {
