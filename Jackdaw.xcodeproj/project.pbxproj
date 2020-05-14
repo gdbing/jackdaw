@@ -109,12 +109,12 @@
 			children = (
 				BF4053B1245B87FF00C681DF /* ContentView.swift */,
 				BF4053C1245B88CD00C681DF /* NoteListView.swift */,
-				BFE8FFD424676D77007BA3F7 /* SearchBarView.swift */,
 				BF4053C7245B8F5D00C681DF /* NoteView.swift */,
 				BFE8FF57245FF44B007BA3F7 /* PhotoPickerView.swift */,
 				BFE8FF6E2460F5AF007BA3F7 /* ImageView.swift */,
 				BFE8FFD02466187A007BA3F7 /* NavigationButton.swift */,
 				BFE1E680246CEC7600119718 /* SearchListScrollView.swift */,
+				BFE8FFD424676D77007BA3F7 /* SearchBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

@@ -12,15 +12,12 @@ struct ContentView: View {
     @State var searchString: String = ""
 
     var body: some View {
-//        NoteListView()
-//            .onAppear(perform: {
-//                // Don't show the lines between items in list view
-        //                UITableView.appearance().separatorStyle = .none
-        //
-        //            })
         NavigationView {
             SearchListScrollView(searchString: $searchString) {
                 NoteListView(filteredBy: $searchString)
+            }
+            .onTapGesture {
+                    UIApplication.shared.dismissKeyboard()
             }
         }
     }
