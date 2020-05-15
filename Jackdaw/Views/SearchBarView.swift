@@ -15,7 +15,7 @@ struct SearchBarView: View {
         TextField("Search", text: $text)
             .padding(7)
             .padding(.horizontal, 25)
-            .background(Color(.systemGray6))
+            .background(Color(.secondarySystemBackground))
             .cornerRadius(8)
             .overlay(
                 HStack {
@@ -33,8 +33,7 @@ struct SearchBarView: View {
                                 .padding(.trailing, 8)
                         }
                     }
-                }
-        )
+                })
             .padding(.horizontal, 10)
     }
 }
