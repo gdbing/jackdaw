@@ -54,9 +54,7 @@ struct SearchListScrollView<Content: View>: View {
                 .frame(maxHeight: proxy.size.height - max(self.keyboardResponder.currentHeight - (UIScreen.main.bounds.size.height-proxy.frame(in: .global).maxY), 0))
                 .background(FixedView())
                 .onPreferenceChange(KeyTypes.PrefKey.self) { values in
-                    if !self.isSearchBarShown {
-                        self.showSearchBarLogic(values: values)
-                    }
+                        self.onScroll(values: values)
                 }
                 .onAppear(perform: {
                     self.searchString = ""
@@ -67,7 +65,7 @@ struct SearchListScrollView<Content: View>: View {
         }
     }
     
-    func showSearchBarLogic(values: [KeyTypes.PrefData]) {
+    func onScroll(values: [KeyTypes.PrefData]) {
         DispatchQueue.main.async {
             
             // Calculate scroll offset
@@ -77,6 +75,10 @@ struct SearchListScrollView<Content: View>: View {
             
             if self.previousScrollOffset > self.searchHeight && scrollOffset <= self.searchHeight {
                 self.isSearchBarShown = true
+            }
+            
+            if scrollOffset > 0 {
+                UIApplication.shared.dismissKeyboard()
             }
             
             self.previousScrollOffset = scrollOffset
