@@ -130,11 +130,11 @@ struct NoteTextFieldView: UIViewRepresentable {
             } 
         }
         @objc func keyboardHideShow(sender: NSNotification) {
-            self.parent.view.textContainerInset = UIEdgeInsets(top: 0, left: 8, bottom: self.parent.keyboardResponder.currentHeight, right: 8)
+            self.parent.view.textContainerInset = UIEdgeInsets(top: 8, left: 0, bottom: self.parent.keyboardResponder.currentHeight, right: 0)
         }
 
         @objc func keyboardWillHide(sender: NSNotification) {
-            self.parent.view.textContainerInset = UIEdgeInsets(top: 0, left: 8, bottom: self.parent.keyboardResponder.currentHeight + 40, right: 8)
+            self.parent.view.textContainerInset = UIEdgeInsets(top: 8, left: 0, bottom: self.parent.keyboardResponder.currentHeight + 40, right: 0)
         }
     }
 }
