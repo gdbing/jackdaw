@@ -9,18 +9,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var searchString: String = ""
-    
     var body: some View {
         NavigationView {
-            VStack {
-                SearchListScrollView(searchString: self.$searchString) {
-                    NoteListView(filteredBy: self.$searchString)
-                }
-                .onTapGesture {
-                    UIApplication.shared.dismissKeyboard()
-                }
-            }
+            NoteListView()
+//                .onTapGesture {
+//                    UIApplication.shared.dismissKeyboard()
+//            }
         }
     }
 }

@@ -9,78 +9,83 @@
 
 import SwiftUI
 
-struct SearchListScrollView<Content: View>: View {
-    @ObservedObject var keyboardResponder = KeyboardResponder()
-
+struct SearchListScrollView: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(entity: Note.entity(),
+                  sortDescriptors: [NSSortDescriptor(keyPath: \Note.sortDate, ascending: false)],
+                  predicate: NSPredicate(format: "text != ''"))
+    var notes: FetchedResults<Note>
+    
+//    @ObservedObject var keyboardResponder = KeyboardResponder()
     @State private var previousScrollOffset: CGFloat = 0
     @State private var isSearchBarShown: Bool = false
-    @Binding var searchString: String
-    private let searchHeight: CGFloat
-    let content: Content
-    
-    init(height: CGFloat = 60, searchString: Binding<String>, @ViewBuilder content: () -> Content) {
-        self.searchHeight = height
-        self._searchString = searchString
-        self.content = content()
-    }
+    @State private var searchString: String = ""
+    private let searchHeight: CGFloat = 48.0
     
     var body: some View {
+        
         GeometryReader { proxy in
-            VStack {
-                ScrollView {
-                    ZStack(alignment: .top) {
+            ZStack(alignment: .top) {
+                List {
+                    ZStack {
                         MovingView()
-                        
-                        self.content
-                            .alignmentGuide(.top, computeValue: { d in
-                                self.isSearchBarShown ? -self.searchHeight : 0.0
-                            })
-                        
                         SearchBarView(text: self.$searchString)
-                            .frame(height: self.searchHeight * 0.25)
-                            .padding(.vertical, self.searchHeight * 0.375)
-                            .offset(y: -self.searchHeight + (self.isSearchBarShown ? self.searchHeight : 0.0))
+                    }
+                    .frame(height: self.searchHeight - 12)
+                    ForEach(self.filteredNotes()) { note in
+                        ListRowView(note: note)
+                    }
+                    .onDelete { (indexSet) in
+                        let noteToDelete = self.filteredNotes()[indexSet.first!]
+                        UserData().delete(note: noteToDelete)
                     }
                 }
-/*
-    keyboardResponder.currentHeight can be greater than the amount
-    of this view which is being obscured
 
-    `self.keyboardResponder.currentHeight - (UIScreen.main.bounds.size.height-proxy.frame(in: .global)`
-
-    accounts for the small gap at the bottom of the screen on OLED iPhones
-    which isn't used by this view, but is filled by the keyboard
- */
-                .frame(maxHeight: proxy.size.height - max(self.keyboardResponder.currentHeight - (UIScreen.main.bounds.size.height-proxy.frame(in: .global).maxY), 0))
+                .frame(height: proxy.size.height + (self.isSearchBarShown ? 0.0 : self.searchHeight))
+                .offset(y: (self.isSearchBarShown ? 0.0 : -self.searchHeight/2))
                 .background(FixedView())
                 .onPreferenceChange(KeyTypes.PrefKey.self) { values in
-                        self.onScroll(values: values)
+                    self.onScroll(values: values)
                 }
                 .onAppear(perform: {
+                    UITableView.appearance().separatorColor = .clear
                     self.searchString = ""
                     self.isSearchBarShown = false
                 })
-                Spacer()
             }
         }
+        .navigationBarTitle("Jackdaw", displayMode: .inline)
     }
+    
+    func filteredNotes() -> [Note] {
+        return notes.filter({ searchString.isEmpty ? true : $0.text.localizedCaseInsensitiveContains(searchString)})
+    }
+        
+    // MARK: - scroll offset searchbar
     
     func onScroll(values: [KeyTypes.PrefData]) {
         DispatchQueue.main.async {
-            
             // Calculate scroll offset
             let movingBounds = values.first { $0.viewType == .movingView }?.bounds ?? .zero
             let fixedBounds = values.first { $0.viewType == .fixedView }?.bounds ?? .zero
             let scrollOffset = movingBounds.minY - fixedBounds.minY
+            let isScrollingDown = scrollOffset < self.previousScrollOffset
             
-            if self.previousScrollOffset > self.searchHeight && scrollOffset <= self.searchHeight {
+            if isScrollingDown && scrollOffset > self.searchHeight/2 {
+                // SearchBar is on top, so scroll up to reveal it
+                // but toggle isSearchBarShown while scrolling back down
+                // because the animations work better with that
                 self.isSearchBarShown = true
+            }
+
+            if !isScrollingDown && scrollOffset < -self.searchHeight/2 {
+                self.isSearchBarShown = false
             }
             
             if scrollOffset > 0 {
                 UIApplication.shared.dismissKeyboard()
             }
-            
+                        
             self.previousScrollOffset = scrollOffset
         }
     }
@@ -126,8 +131,11 @@ struct KeyTypes {
 
 struct SearchListScrollView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchListScrollView(height: 70, searchString: .constant("")) {
-            Text("yolo")
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        UserData().fakePreviewData()
+
+        return NavigationView {
+            SearchListScrollView().environment(\.managedObjectContext, context)
         }
     }
 }

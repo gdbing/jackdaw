@@ -9,27 +9,10 @@
 import SwiftUI
 
 struct NoteListView: View {
-    @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(entity: Note.entity(),
-                  sortDescriptors: [NSSortDescriptor(keyPath: \Note.sortDate, ascending: false)],
-                  predicate: NSPredicate(format: "text != ''"))
-    var notes: FetchedResults<Note>
 
-    @Binding var filteredBy: String
-    var showSearch = false
-    
     var body: some View {
-        VStack {
-            ForEach(notes.filter({ filteredBy.isEmpty ? true : $0.text.contains(filteredBy)})) { note in
-                ListRowView(note: note)
-            }
-//            .onDelete { (indexSet) in
-//                let noteToDelete = self.notes.filter({ self.searchText.isEmpty ? true : $0.text.contains(self.searchText)})[indexSet.first!]
-//                UserData().delete(note: noteToDelete)
-            //            }
-            Spacer()
-        }
-        .navigationBarTitle(Text("Jackdaw \(notes.count)"), displayMode: .inline)
+        SearchListScrollView()
+        .navigationBarTitle(Text("Jackdaw"), displayMode: .inline)
         .navigationBarItems(leading: ArchiveButton(),
                             trailing: NewNoteButton()
         )
@@ -118,6 +101,8 @@ struct NoteListView_Previews: PreviewProvider {
     static var previews: some View {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         UserData().fakePreviewData()
-        return NoteListView(filteredBy: .constant("")).environment(\.managedObjectContext, context)
+        return NavigationView {
+            NoteListView().environment(\.managedObjectContext, context)
+        }
     }
 }
