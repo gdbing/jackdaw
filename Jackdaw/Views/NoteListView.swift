@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct NoteListView: View {
-
     var body: some View {
         SearchListScrollView()
         .navigationBarTitle(Text("Jackdaw"), displayMode: .inline)
@@ -39,10 +38,7 @@ struct NewNoteButton: View {
                 self.isActive = true
             }) {
                 Image(systemName: "square.and.pencil")
-//                    .resizable()
-//                    .frame(width: 24, height: 24)
                     .foregroundColor(Typography().styleColor)
-//                .padding(24)
                     .padding(.vertical, 36)
                     .padding(.leading, 48)
                     .padding(.trailing, 2)
