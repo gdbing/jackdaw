@@ -13,6 +13,8 @@ struct SearchBarView: View {
     
     var body: some View {
         TextField("Search", text: $text)
+            .font(Font.custom("AvenirNext-Regular", size: 16.0))
+//            .font(Font.)
             .padding(7)
             .padding(.horizontal, 25)
             .background(Color(.secondarySystemBackground))
@@ -43,6 +45,7 @@ struct SearchBar_Previews: PreviewProvider {
         VStack {
             SearchBarView(text: .constant(""))
             SearchBarView(text: .constant("a thousand bees"))
+            SearchBarView(text: .constant("Jackdaw"))
             Spacer()
         }
     }
