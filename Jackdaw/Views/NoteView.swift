@@ -43,20 +43,6 @@ struct NoteView: View {
                 Spacer()
             }
         }
-        // Hide the system back button
-        .navigationBarBackButtonHidden(true)
-        // Add your custom back button here
-        .navigationBarItems(leading:
-            Button(action: {
-                self.presentationMode.wrappedValue.dismiss()
-            }) {
-                HStack {
-                    Image(systemName: "chevron.left")
-                    Text("Back")
-                }
-                .foregroundColor(Typography().styleColor)
-        })
-        
 //                }
 //                .sheet(isPresented: self.$showPhotoPicker,
 //                       onDismiss: self.updateNoteWithImage) {

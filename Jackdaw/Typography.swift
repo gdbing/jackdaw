@@ -11,6 +11,7 @@ import SwiftUI
 class Typography {
     
     let styleColor = Color.init(red: 0.0, green: 0.1, blue: 0.5)
+    let styleUIColor = UIColor.init(red: 0.0, green: 0.1, blue: 0.5, alpha: 1.0)
     
     static func attributedStringFrom(string: String) -> NSAttributedString {
         if string.count < 1 { return NSAttributedString(string: "") }

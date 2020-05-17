@@ -12,12 +12,19 @@ struct ContentView: View {
     
     init() {
         UINavigationBar.appearance().titleTextAttributes = [
-//            .foregroundColor: Typography().styleColor, // need a UIColor version of the same thing
+            .foregroundColor: Typography().styleUIColor,
             .font : UIFont.init(name: "AvenirNext-DemiBold", size: 18.0)!
         ]
-
-
-
+        var textAttributes: [NSAttributedString.Key:Any]
+        let barItemCustomFont = UIFont.init(name: "AvenirNext-Medium", size: 18.0)
+        if let customFont = barItemCustomFont {
+            textAttributes = [NSAttributedString.Key.foregroundColor: Typography().styleUIColor,
+                              NSAttributedString.Key.font: customFont]
+        } else {
+            textAttributes = [NSAttributedString.Key.foregroundColor: Typography().styleUIColor]
+        }
+        UIBarButtonItem.appearance().setTitleTextAttributes(textAttributes, for: .normal)
+        UINavigationBar.appearance().tintColor = Typography().styleUIColor
     }
     var body: some View {
         NavigationView {
