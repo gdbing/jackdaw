@@ -13,8 +13,7 @@ struct NoteListView: View {
     var body: some View {
         SearchListScrollView()
         .navigationBarTitle(Text("Jackdaw"), displayMode: .inline)
-        .navigationBarItems(leading: ArchiveButton(),
-                            trailing: NewNoteButton()
+        .navigationBarItems(trailing: NewNoteButton()
         )
     }
 }
@@ -40,6 +39,9 @@ struct NewNoteButton: View {
                 self.isActive = true
             }) {
                 Image(systemName: "square.and.pencil")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .foregroundColor(Typography().styleColor)
             }
         }
     }

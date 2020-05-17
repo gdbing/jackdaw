@@ -9,6 +9,16 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    init() {
+        UINavigationBar.appearance().titleTextAttributes = [
+//            .foregroundColor: Typography().styleColor, // need a UIColor version of the same thing
+            .font : UIFont.init(name: "AvenirNext-DemiBold", size: 18.0)!
+        ]
+
+
+
+    }
     var body: some View {
         NavigationView {
             NoteListView()

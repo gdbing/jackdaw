@@ -16,8 +16,10 @@ struct NoteView: View {
     @State private var showPhotoPicker: Bool = false
     @State private var photoPickerImage: UIImage?
     @ObservedObject var keyboardResponder = KeyboardResponder()
+    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
+        
 //        ScrollView {
 //            GeometryReader { proxy in
 //                VStack {
@@ -41,6 +43,19 @@ struct NoteView: View {
                 Spacer()
             }
         }
+        // Hide the system back button
+        .navigationBarBackButtonHidden(true)
+        // Add your custom back button here
+        .navigationBarItems(leading:
+            Button(action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }) {
+                HStack {
+                    Image(systemName: "chevron.left")
+                    Text("Back")
+                }
+                .foregroundColor(Typography().styleColor)
+        })
         
 //                }
 //                .sheet(isPresented: self.$showPhotoPicker,
