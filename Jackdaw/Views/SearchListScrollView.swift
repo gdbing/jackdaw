@@ -47,14 +47,14 @@ struct SearchListScrollView: View {
                 .onPreferenceChange(KeyTypes.PrefKey.self) { values in
                     self.onScroll(values: values)
                 }
-                .onAppear(perform: {
-                    UITableView.appearance().separatorColor = .clear
-                    self.searchString = ""
-                    self.isSearchBarShown = false
-                })
             }
         }
         .navigationBarTitle("Jackdaw", displayMode: .inline)
+        .onAppear(perform: {
+            UITableView.appearance().separatorColor = .clear
+            self.searchString = ""
+            self.isSearchBarShown = false
+        })
     }
     
     func filteredNotes() -> [Note] {
@@ -69,17 +69,9 @@ struct SearchListScrollView: View {
             let movingBounds = values.first { $0.viewType == .movingView }?.bounds ?? .zero
             let fixedBounds = values.first { $0.viewType == .fixedView }?.bounds ?? .zero
             let scrollOffset = movingBounds.minY - fixedBounds.minY
-            let isScrollingDown = scrollOffset < self.previousScrollOffset
             
-            if isScrollingDown && scrollOffset > self.searchHeight/2 {
-                // SearchBar is on top, so scroll up to reveal it
-                // but toggle isSearchBarShown while scrolling back down
-                // because the animations work better with that
+            if self.previousScrollOffset > self.searchHeight && scrollOffset <= self.searchHeight {
                 self.isSearchBarShown = true
-            }
-
-            if !isScrollingDown && scrollOffset < -self.searchHeight/2 {
-                self.isSearchBarShown = false
             }
             
             if scrollOffset > 0 {
