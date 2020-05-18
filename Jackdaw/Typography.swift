@@ -17,14 +17,14 @@ class Typography {
         if string.count < 1 { return NSAttributedString(string: "") }
         
         // Body Typography
-        let bodyFont = UIFont.init(name: "AvenirNext-Medium", size: 14.0)!//UIFont.systemFont(ofSize: 14.0, weight: .regular)
+        let bodyFont = UIFont.init(name: "AvenirNext-Regular", size: 14.0)!//UIFont.systemFont(ofSize: 14.0, weight: .regular)
         let lineSpacing = NSMutableParagraphStyle()
         lineSpacing.paragraphSpacing = 4
         let bodyAttributes = [NSAttributedString.Key.font: bodyFont,
                               NSAttributedString.Key.paragraphStyle: lineSpacing]
         
         // Title Typography
-        let systemFont = UIFont.init(name: "AvenirNext-DemiBold", size: 14.0)!//UIFont.systemFont(ofSize: 14.0, weight: .bold)
+        let systemFont = UIFont.init(name: "AvenirNext-DemiBold", size: 16.0)!//UIFont.systemFont(ofSize: 14.0, weight: .bold)
         let smallCapsDesc = systemFont.fontDescriptor.addingAttributes([
             UIFontDescriptor.AttributeName.featureSettings: [
                 [

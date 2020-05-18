@@ -17,14 +17,12 @@ public class Note: NSManagedObject, Identifiable {
         return NSFetchRequest<Note>(entityName: "Note")
     }
     
-    @NSManaged public var text: String
     @NSManaged public var id: UUID?
     @NSManaged public var sortDate: Date
-    
-    @NSManaged public var imageData: Data?
-    @NSManaged private var thumbnailData: Data?
-    
+    @NSManaged public var text: String
+
     lazy var headline: String = String(text.trimmingCharacters(in: .whitespaces).split(separator: "\n").first ?? "")
+    
     var body: String {
         get {
             guard let newlineIndex = text.trimmingCharacters(in: .whitespaces).firstIndex(of: "\n") else {
@@ -34,6 +32,14 @@ public class Note: NSManagedObject, Identifiable {
         }
     }
 
+}
+
+// MARK: - images
+
+extension Note {
+    @NSManaged public var imageData: Data?
+    @NSManaged private var thumbnailData: Data?
+    
     var image: UIImage? {
         set {
             guard let newValue = newValue else {

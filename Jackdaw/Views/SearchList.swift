@@ -9,7 +9,7 @@
 
 import SwiftUI
 
-struct SearchListScrollView: View {
+struct SearchList: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(entity: Note.entity(),
                   sortDescriptors: [NSSortDescriptor(keyPath: \Note.sortDate, ascending: false)],
@@ -33,7 +33,7 @@ struct SearchListScrollView: View {
                     }
                     .frame(height: self.searchHeight - 12)
                     ForEach(self.filteredNotes()) { note in
-                        ListRowView(note: note)
+                        NoteListRow(note: note)
                     }
                     .onDelete { (indexSet) in
                         let noteToDelete = self.filteredNotes()[indexSet.first!]
@@ -60,9 +60,11 @@ struct SearchListScrollView: View {
     func filteredNotes() -> [Note] {
         return notes.filter({ searchString.isEmpty ? true : $0.text.localizedCaseInsensitiveContains(searchString)})
     }
-        
-    // MARK: - scroll offset searchbar
-    
+}
+
+// MARK: - scroll offset searchbar
+
+extension SearchList {
     func onScroll(values: [KeyTypes.PrefData]) {
         DispatchQueue.main.async {
             // Calculate scroll offset
@@ -97,27 +99,28 @@ struct SearchListScrollView: View {
             }
         }
     }
-}
 
-struct KeyTypes {
-    enum ViewType: Int {
-        case movingView
-        case fixedView
-    }
     
-    struct PrefData: Equatable {
-        let viewType: ViewType
-        let bounds: CGRect
-    }
-    
-    struct PrefKey: PreferenceKey {
-        static var defaultValue: [PrefData] = []
-        
-        static func reduce(value: inout [PrefData], nextValue: () -> [PrefData]) {
-            value.append(contentsOf: nextValue())
+    struct KeyTypes {
+        enum ViewType: Int {
+            case movingView
+            case fixedView
         }
         
-        typealias Value = [PrefData]
+        struct PrefData: Equatable {
+            let viewType: ViewType
+            let bounds: CGRect
+        }
+        
+        struct PrefKey: PreferenceKey {
+            static var defaultValue: [PrefData] = []
+            
+            static func reduce(value: inout [PrefData], nextValue: () -> [PrefData]) {
+                value.append(contentsOf: nextValue())
+            }
+            
+            typealias Value = [PrefData]
+        }
     }
 }
 
@@ -127,7 +130,7 @@ struct SearchListScrollView_Previews: PreviewProvider {
         UserData().fakePreviewData()
 
         return NavigationView {
-            SearchListScrollView().environment(\.managedObjectContext, context)
+            SearchList().environment(\.managedObjectContext, context)
         }
     }
 }

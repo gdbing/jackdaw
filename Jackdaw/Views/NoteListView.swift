@@ -10,7 +10,7 @@ import SwiftUI
 
 struct NoteListView: View {
     var body: some View {
-        SearchListScrollView()
+        SearchList()
         .navigationBarTitle(Text("Jackdaw"), displayMode: .inline)
         .navigationBarItems(trailing: NewNoteButton()
         )
@@ -39,53 +39,11 @@ struct NewNoteButton: View {
             }) {
                 Image(systemName: "square.and.pencil")
                     .foregroundColor(Typography().styleColor)
+                    // padding to make the touch target bigger
                     .padding(.vertical, 36)
                     .padding(.leading, 48)
                     .padding(.trailing, 2)
             }
-        }
-    }
-}
-
-struct ListRowView: View {
-    @ObservedObject var note: Note
-    @State var isActive = false
-    
-    var body: some View {
-        VStack {
-            Button(action: {
-                self.isActive = true
-            }) {
-                HStack() {
-                    RowLabelView(note: self.note, lines: 3, width: 100.0)
-                    Spacer()
-                    if note.thumbnail != nil {
-//                        Image(uiImage: note.thumbnail!)
-                    }
-                }
-                .padding(.horizontal)
-            }
-            NavigationLink(destination: NoteView(note:note), isActive: $isActive) { Text("") }
-            Spacer()
-        }
-        .frame(maxHeight: 65.0)
-    }
-    
-    struct RowLabelView: UIViewRepresentable {
-        @ObservedObject var note: Note
-        let lines: Int
-        let width: CGFloat // this is problematic
-        
-        func makeUIView(context: Context) -> UILabel {
-            let label = UILabel()
-            label.preferredMaxLayoutWidth = width // This doesn't work as I expected. The width you pass in doesn't match the width the text fits itself to
-            label.numberOfLines = self.lines
-            label.attributedText = Typography.attributedStringFrom(string: self.note.text)
-            return label
-        }
-        
-        func updateUIView(_ uiView: UILabel, context: UIViewRepresentableContext<ListRowView.RowLabelView>) {
-            uiView.attributedText = Typography.attributedStringFrom(string: self.note.text)
         }
     }
 }
@@ -95,7 +53,7 @@ struct ListRowSearchView: View {
     private let searchString: String
     
     var body: some View {
-        ListRowView(note: note)
+        NoteListRow(note: note)
     }
 }
 
