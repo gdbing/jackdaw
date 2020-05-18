@@ -48,15 +48,6 @@ struct NewNoteButton: View {
     }
 }
 
-struct ListRowSearchView: View {
-    @ObservedObject var note: Note
-    private let searchString: String
-    
-    var body: some View {
-        NoteListRow(note: note)
-    }
-}
-
 struct NoteListView_Previews: PreviewProvider {
     static var previews: some View {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext

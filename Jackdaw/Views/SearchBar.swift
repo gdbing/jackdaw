@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct SearchBarView: View {
+struct SearchBar: View {
     @Binding var text: String
     
     var body: some View {
@@ -43,9 +43,9 @@ struct SearchBarView: View {
 struct SearchBar_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            SearchBarView(text: .constant(""))
-            SearchBarView(text: .constant("a thousand bees"))
-            SearchBarView(text: .constant("Jackdaw"))
+            SearchBar(text: .constant(""))
+            SearchBar(text: .constant("a thousand bees"))
+            SearchBar(text: .constant("Jackdaw"))
             Spacer()
         }
     }

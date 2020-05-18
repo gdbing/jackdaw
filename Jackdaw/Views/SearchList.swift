@@ -29,15 +29,25 @@ struct SearchList: View {
                 List {
                     ZStack {
                         MovingView()
-                        SearchBarView(text: self.$searchString)
+                        SearchBar(text: self.$searchString)
                     }
                     .frame(height: self.searchHeight - 12)
-                    ForEach(self.filteredNotes()) { note in
-                        NoteListRow(note: note)
-                    }
-                    .onDelete { (indexSet) in
-                        let noteToDelete = self.filteredNotes()[indexSet.first!]
-                        UserData().delete(note: noteToDelete)
+                    if self.searchString == "" {
+                        ForEach(self.notes) { note in
+                            NoteListRow(note: note)
+                        }
+                        .onDelete { (indexSet) in
+                            let noteToDelete = self.notes[indexSet.first!]
+                            UserData().delete(note: noteToDelete)
+                        }
+                    } else {
+                        ForEach(self.filteredNotes()) { note in
+                            SearchListRow(note: note, searchString: self.searchString)
+                        }
+                        .onDelete { (indexSet) in
+                            let noteToDelete = self.filteredNotes()[indexSet.first!]
+                            UserData().delete(note: noteToDelete)
+                        }
                     }
                 }
 
@@ -51,7 +61,6 @@ struct SearchList: View {
         }
         .navigationBarTitle("Jackdaw", displayMode: .inline)
         .onAppear(perform: {
-            UITableView.appearance().separatorColor = .clear
             self.searchString = ""
             self.isSearchBarShown = false
         })

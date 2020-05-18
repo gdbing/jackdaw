@@ -11,6 +11,8 @@ import SwiftUI
 struct ContentView: View {
     
     init() {
+        UITableView.appearance().separatorColor = .clear
+
         UINavigationBar.appearance().titleTextAttributes = [
             .foregroundColor: Typography().styleUIColor,
             .font : UIFont.init(name: "AvenirNext-DemiBold", size: 18.0)!
@@ -18,9 +20,12 @@ struct ContentView: View {
         
         let textAttributes: [NSAttributedString.Key: Any] = [
             // For some reason, setting the text attributes of UIBarButtonItem.appearance()
-            // breaks the back button, so that you have to tap on the "<" of "< All Notes".
-            // If you tap on "All Notes", the text disappears and nothing else happens
-            // I don't want to work around it, so we just hide the text
+            // breaks the back button, so that you have to tap the leftmost part of it.
+            // If you tap within "< All N" of "< All Notes", it works, but
+            // if you tap on "otes", "All Notes" disappears and nothing else happens,
+            // and then you have to click on the remaining "<"
+            // I don't want to work around this issue, so we just hide the text.
+            // This doesn't hide the "<", which is still recognizably a back button
             .foregroundColor: UIColor.clear,
             .font: UIFont.init(name: "AvenirNext-Medium", size: 18.0)!
         ]
