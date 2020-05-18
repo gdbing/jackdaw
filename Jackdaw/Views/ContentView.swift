@@ -15,14 +15,15 @@ struct ContentView: View {
             .foregroundColor: Typography().styleUIColor,
             .font : UIFont.init(name: "AvenirNext-DemiBold", size: 18.0)!
         ]
-        var textAttributes: [NSAttributedString.Key:Any]
-        let barItemCustomFont = UIFont.init(name: "AvenirNext-Medium", size: 18.0)
-        if let customFont = barItemCustomFont {
-            textAttributes = [NSAttributedString.Key.foregroundColor: Typography().styleUIColor,
-                              NSAttributedString.Key.font: customFont]
-        } else {
-            textAttributes = [NSAttributedString.Key.foregroundColor: Typography().styleUIColor]
-        }
+        
+        let textAttributes: [NSAttributedString.Key: Any] = [
+            // For some reason, setting the text attributes of UIBarButtonItem.appearance()
+            // breaks the back button, so that you have to tap on the "<" of "< All Notes".
+            // If you tap on "All Notes", the text disappears and nothing else happens
+            // I don't want to work around it, so we just hide the text
+            .foregroundColor: UIColor.clear,
+            .font: UIFont.init(name: "AvenirNext-Medium", size: 18.0)!
+        ]
         UIBarButtonItem.appearance().setTitleTextAttributes(textAttributes, for: .normal)
         UINavigationBar.appearance().tintColor = Typography().styleUIColor
     }
