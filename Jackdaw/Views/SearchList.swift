@@ -34,7 +34,7 @@ struct SearchList: View {
                     .frame(height: self.searchHeight - 12)
                     if self.searchString == "" {
                         ForEach(self.notes) { note in
-                            NoteListRow(note: note)
+                            NoteCell(note: note)
                         }
                         .onDelete { (indexSet) in
                             let noteToDelete = self.notes[indexSet.first!]

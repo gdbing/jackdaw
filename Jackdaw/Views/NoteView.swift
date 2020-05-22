@@ -77,7 +77,7 @@ struct NoteTextFieldView: UIViewRepresentable {
 //        view = UITextView()
         let text = self.note.text
         
-        view.attributedText = Typography.attributedStringFrom(string: text)
+        view.attributedText = Typography().attributedStringFrom(string: text)
         view.isEditable = true
         view.backgroundColor = .clear
         view.delegate = context.coordinator
@@ -120,7 +120,7 @@ struct NoteTextFieldView: UIViewRepresentable {
         func textViewDidChange(_ textView: UITextView) {
             // probably don't need this if we're not just passing the text on somewhere else
             self.parent.note.text = textView.text
-            textView.attributedText = Typography.attributedStringFrom(string: textView.text)
+            textView.attributedText = Typography().attributedStringFrom(string: textView.text)
             
             if savedRecently { return }
             

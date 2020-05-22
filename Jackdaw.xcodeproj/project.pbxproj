@@ -18,7 +18,7 @@
 		BF4053C5245B8A3200C681DF /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4053C3245B8A3100C681DF /* Note.swift */; };
 		BF4053C8245B8F5D00C681DF /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4053C7245B8F5D00C681DF /* NoteView.swift */; };
 		BF58FCE3246DC7990006B7E1 /* UIApplication+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF58FCE2246DC7990006B7E1 /* UIApplication+Keyboard.swift */; };
-		BFB6293F247222BA00E06F3C /* NoteListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB6293E247222BA00E06F3C /* NoteListRow.swift */; };
+		BFB6293F247222BA00E06F3C /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB6293E247222BA00E06F3C /* NoteCell.swift */; };
 		BFE1E681246CEC7600119718 /* SearchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE1E680246CEC7600119718 /* SearchList.swift */; };
 		BFE8FF58245FF44B007BA3F7 /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE8FF57245FF44B007BA3F7 /* PhotoPickerView.swift */; };
 		BFE8FF5A245FFFB9007BA3F7 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE8FF59245FFFB9007BA3F7 /* UserData.swift */; };
@@ -42,7 +42,7 @@
 		BF4053C3245B8A3100C681DF /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		BF4053C7245B8F5D00C681DF /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		BF58FCE2246DC7990006B7E1 /* UIApplication+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Keyboard.swift"; sourceTree = "<group>"; };
-		BFB6293E247222BA00E06F3C /* NoteListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListRow.swift; sourceTree = "<group>"; };
+		BFB6293E247222BA00E06F3C /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		BFE1E680246CEC7600119718 /* SearchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchList.swift; sourceTree = "<group>"; };
 		BFE8FF57245FF44B007BA3F7 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
 		BFE8FF59245FFFB9007BA3F7 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 			children = (
 				BF4053B1245B87FF00C681DF /* ContentView.swift */,
 				BF4053C1245B88CD00C681DF /* NoteListView.swift */,
-				BFB6293E247222BA00E06F3C /* NoteListRow.swift */,
+				BFB6293E247222BA00E06F3C /* NoteCell.swift */,
 				BF4053C7245B8F5D00C681DF /* NoteView.swift */,
 				BFE8FF57245FF44B007BA3F7 /* PhotoPickerView.swift */,
 				BFE8FF6E2460F5AF007BA3F7 /* ImageView.swift */,
@@ -199,7 +199,7 @@
 				BF4053B0245B87FF00C681DF /* Jackdaw.xcdatamodeld in Sources */,
 				BF4053C8245B8F5D00C681DF /* NoteView.swift in Sources */,
 				BFE8FF58245FF44B007BA3F7 /* PhotoPickerView.swift in Sources */,
-				BFB6293F247222BA00E06F3C /* NoteListRow.swift in Sources */,
+				BFB6293F247222BA00E06F3C /* NoteCell.swift in Sources */,
 				BFE8FFD12466187A007BA3F7 /* NavigationButton.swift in Sources */,
 				BF4053C2245B88CD00C681DF /* NoteListView.swift in Sources */,
 				BF4053C5245B8A3200C681DF /* Note.swift in Sources */,
