@@ -13,57 +13,17 @@ fileprivate var savedRecently: Bool = false
 
 struct NoteView: View {
     @ObservedObject var note: Note
-    @State private var showPhotoPicker: Bool = false
-    @State private var photoPickerImage: UIImage?
-    @ObservedObject var keyboardResponder = KeyboardResponder()
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
-        
-//        ScrollView {
-//            GeometryReader { proxy in
-//                VStack {
-//                    if self.note.imageData != nil {
-//                        NavigationLink(destination: ImageView(image: self.note.image!)) {
-//                            Image(uiImage: self.note.image!)
-//                                .resizable()
-//                                //                            .scaledToFit()
-//                                .frame(width:proxy.size.width)
-//                        }.buttonStyle(PlainButtonStyle())
-//                    }
         VStack {
             GeometryReader { proxy in
                 NoteTextFieldView(note: self.note)
                     .padding(.horizontal)
                     .padding(.top)
-//                    .frame(maxHeight: proxy.size.height - max(self.keyboardResponder.currentHeight - (UIScreen.main.bounds.size.height-proxy.frame(in: .global).maxY), 0))
-
-//                    .frame(maxHeight: proxy.size.height-self.keyboardResponder.currentHeight)
-                
                 Spacer()
             }
         }
-//                }
-//                .sheet(isPresented: self.$showPhotoPicker,
-//                       onDismiss: self.updateNoteWithImage) {
-//                        PhotoPickerView(image: self.$photoPickerImage)
-//                }
-//                .navigationBarItems(trailing: Button(action: {
-//                    self.showPhotoPicker = true
-//                }) {
-//                    Image(systemName: "photo")
-//                    }
-//                )
-//            }
-//        }
-    }
-    func updateNoteWithImage() {
-        guard let newImage = self.photoPickerImage else {
-            return
-        }
-        self.photoPickerImage = nil
-        self.note.image = newImage
-        UserData().save()
     }
 }
 
