@@ -12,22 +12,20 @@ import SwiftUI
 struct NoteCell: View {
     @ObservedObject var note: Note
     @State var isActive = false
-    var previewText: String? = nil
+//    var previewText: String? = nil
     
     var body: some View {
-//        GeometryReader { proxy in
-            ZStack {
-                NavigationLink(destination: NoteView(note:note), isActive: $isActive) { Text("") }
-                    .hidden()
-                
-                Button(action: {
-                    self.isActive = true
-                }) {
-                    RowLabel(note: self.note, lines: 3)
-                }
+        ZStack {
+            NavigationLink(destination: NoteView(note:self.note), isActive: self.$isActive) { Text("") }
+                .hidden()
+            Button(action: {
+                self.isActive = true
+            }) {
+                RowLabel(note: self.note, lines: 3)
             }
-            .frame(height: self.heightForString(string: self.note.text,width: 350))//proxy.size.width))
-//        }
+            
+        }
+        .frame(height: self.heightForString(string: self.note.text))
     }
     
     struct RowLabel: UIViewRepresentable {
@@ -38,21 +36,24 @@ struct NoteCell: View {
             let label = UILabel()
             label.preferredMaxLayoutWidth = 1.0
             label.numberOfLines = self.lines
-            label.attributedText = Typography().previewStringFrom(string: self.note.text)
+            label.attributedText = Typography().attributedStringFrom(string: self.note.truncatedText())
             label.sizeToFit()
             return label
         }
         
         func updateUIView(_ uiView: UILabel, context: UIViewRepresentableContext<NoteCell.RowLabel>) {
-            uiView.attributedText = Typography().previewStringFrom(string: self.note.text)
+            uiView.attributedText = Typography().attributedStringFrom(string: self.note.truncatedText())
         }
     }
     
-    func heightForString(string: String, width: CGFloat) -> CGFloat {
-        let attrString = Typography().previewStringFrom(string: string)
+    func heightForString(string: String) -> CGFloat {
+        let maxHeight: CGFloat = 69.0 // DANGER: MAGIC NUMBER
+        let width = UIScreen.main.bounds.size.width
+        
+        let attrString = Typography().attributedStringFrom(string: self.note.text)
         
         let ts = NSTextStorage(attributedString: attrString)
-        let size = CGSize(width:width, height:70)
+        let size = CGSize(width:width, height:maxHeight)
         
         let tc = NSTextContainer(size: size)
         tc.lineFragmentPadding = 0.0
@@ -92,22 +93,22 @@ struct NoteListRow_Previews: PreviewProvider {
         
         let threeLineNote = Note(context: context)
         threeLineNote.text = "one\ntwo\nthree"
+        
         let twoLiner = Note(context: context)
         twoLiner.text = "the first line\nthe second line"
+        
+        let fourLiner = Note(context: context)
+        fourLiner.text = "when I was\na young man\nmy father\ntook me to the city"
+        
         return Group {
-//            List {
-                NoteCell(note: note)
-//                    .border(Color.blue, width: 1)
-                NoteCell(note: shortNote)
-//                    .border(Color.blue, width: 1)
-                NoteCell(note: threeLineNote)
-//                    .border(Color.blue, width: 1)
-                NoteCell(note: twoLiner)
-//                    .border(Color.blue, width: 1)
-//            }
+            NoteCell(note: note)
+            NoteCell(note: shortNote)
+            NoteCell(note: threeLineNote)
+            NoteCell(note: twoLiner)
+            NoteCell(note: fourLiner)
         }
         .border(Color.blue, width: 1)
-        .previewLayout(.fixed(width: 350, height: 100))
+        .previewLayout(.fixed(width: 350, height: 80))
 
     }
 }

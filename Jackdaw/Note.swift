@@ -31,7 +31,6 @@ public class Note: NSManagedObject, Identifiable {
             return String(text.trimmingCharacters(in: .whitespaces)[newlineIndex...].trimmingCharacters(in: .whitespaces))
         }
     }
-
 }
 
 // MARK: - images
@@ -82,5 +81,27 @@ extension Note {
     
     var thumbnail: UIImage? {
         get { return thumbnailData != nil ? UIImage(data:thumbnailData!) : nil }
+    }
+}
+
+// MARK: - truncated text
+
+extension Note {
+    func truncatedText() -> String {
+        if self.text == "" { return "" }
+        
+        let truncatedText = self.text[..<self.text.index(self.text.startIndex, offsetBy: min(500, self.text.count))]
+        
+        let splitString = truncatedText.split(separator: "\n")
+        
+        var returnString = String(splitString[0])
+        if splitString.count > 1 && splitString[1].count > 0 {
+            returnString = String(returnString + "\n" + splitString[1])
+        }
+        if splitString.count > 2 && splitString[2].count > 0 {
+            returnString = String(returnString + "\n" + splitString[2])
+        }
+
+        return returnString
     }
 }
